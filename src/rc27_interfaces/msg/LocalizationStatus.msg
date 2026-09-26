@@ -1,0 +1,10 @@
+std_msgs/Header header
+uint8 state
+float32 confidence
+float32 match_score
+string detail
+uint8 UNKNOWN=0
+uint8 TRACKING=1
+uint8 DEGADED=2
+uint8 RELOCALIZING=3
+uint8 LOST=4
