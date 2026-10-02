@@ -1,0 +1,6243 @@
+<sdf version='1.7'>
+  <world name='robocon2027_arena'>
+    <physics type='ode'>
+      <max_step_size>0.001</max_step_size>
+      <real_time_update_rate>1000</real_time_update_rate>
+      <real_time_factor>1</real_time_factor>
+    </physics>
+    <scene>
+      <ambient>0.55 0.55 0.62 1</ambient>
+      <background>0.24 0.26 0.3 1</background>
+      <shadows>1</shadows>
+    </scene>
+    <light name='sun' type='directional'>
+      <pose>0 0 40 0 -0 0</pose>
+      <diffuse>0.92 0.92 0.9 1</diffuse>
+      <specular>0.3 0.3 0.3 1</specular>
+      <direction>-0.55 -0.8 -1</direction>
+      <cast_shadows>1</cast_shadows>
+      <attenuation>
+        <range>10</range>
+      </attenuation>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+    <model name='field_base'>
+      <static>1</static>
+      <pose>0 0 -0.03 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>11.6 11.6 0.06</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>11.6 11.6 0.06</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.361 0.275 0.188 1</ambient>
+            <diffuse>0.361 0.275 0.188 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='catch_floor'>
+      <static>1</static>
+      <pose>0 0 -0.25 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>200 200</size>
+            </plane>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='l1_platform'>
+      <static>1</static>
+      <pose>0 0 0.3 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>6 6 0.6</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>6 6 0.6</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.51 0.392 0.282 1</ambient>
+            <diffuse>0.51 0.392 0.282 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='l2_platform'>
+      <static>1</static>
+      <pose>0 0 0.75 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>3 3 0.3</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>3 3 0.3</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.745 0.745 0.725 1</ambient>
+            <diffuse>0.745 0.745 0.725 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='mustika_pillar'>
+      <static>1</static>
+      <pose>0 -4.25 0.25 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <cylinder>
+              <radius>0.135</radius>
+              <length>0.5</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <cylinder>
+              <radius>0.135</radius>
+              <length>0.5</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.392 0.243 0 1</ambient>
+            <diffuse>0.392 0.243 0 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='mustika_ball'>
+      <static>1</static>
+      <pose>0 -4.25 0.6 0 -0 0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>0.27</mass>
+          <inertia>
+            <ixx>0.00108</ixx>
+            <iyy>0.00108</iyy>
+            <izz>0.00108</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name='col'>
+          <geometry>
+            <sphere>
+              <radius>0.1</radius>
+            </sphere>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <sphere>
+              <radius>0.1</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.855 0.647 0.125 1</ambient>
+            <diffuse>0.855 0.647 0.125 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='central_pillar'>
+      <static>1</static>
+      <pose>0 0 1.3 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <cylinder>
+              <radius>0.135</radius>
+              <length>0.8</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <cylinder>
+              <radius>0.135</radius>
+              <length>0.8</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.392 0.243 0 1</ambient>
+            <diffuse>0.392 0.243 0 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='fence_pN'>
+      <static>1</static>
+      <pose>0 5.525 0.05 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>11.1 0.05 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>11.1 0.05 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.392 0.243 0 1</ambient>
+            <diffuse>0.392 0.243 0 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='fence_pS'>
+      <static>1</static>
+      <pose>0 -5.525 0.05 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>11.1 0.05 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>11.1 0.05 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.392 0.243 0 1</ambient>
+            <diffuse>0.392 0.243 0 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='fence_pE'>
+      <static>1</static>
+      <pose>5.525 0 0.05 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>0.05 11.1 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>0.05 11.1 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.392 0.243 0 1</ambient>
+            <diffuse>0.392 0.243 0 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='fence_pW'>
+      <static>1</static>
+      <pose>-5.525 0 0.05 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>0.05 11.1 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>0.05 11.1 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.392 0.243 0 1</ambient>
+            <diffuse>0.392 0.243 0 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='gdiv_0'>
+      <static>1</static>
+      <pose>0 3.325 0.05 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>0.05 0.65 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>0.05 0.65 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.392 0.243 0 1</ambient>
+            <diffuse>0.392 0.243 0 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='gdiv_1'>
+      <static>1</static>
+      <pose>0 5.175 0.05 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>0.05 0.65 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>0.05 0.65 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.392 0.243 0 1</ambient>
+            <diffuse>0.392 0.243 0 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='gdiv_2'>
+      <static>1</static>
+      <pose>0 -3.375 0.05 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>0.05 0.75 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>0.05 0.75 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.392 0.243 0 1</ambient>
+            <diffuse>0.392 0.243 0 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='gdiv_3'>
+      <static>1</static>
+      <pose>0 -5.125 0.05 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>0.05 0.75 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>0.05 0.75 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.392 0.243 0 1</ambient>
+            <diffuse>0.392 0.243 0 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='ddiv_0'>
+      <static>1</static>
+      <pose>0 1.9 0.65 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>0.05 0.8 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>0.05 0.8 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.392 0.243 0 1</ambient>
+            <diffuse>0.392 0.243 0 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='ddiv_1'>
+      <static>1</static>
+      <pose>0 -1.9 0.65 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>0.05 0.8 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>0.05 0.8 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.392 0.243 0 1</ambient>
+            <diffuse>0.392 0.243 0 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='ramp_red'>
+      <static>1</static>
+      <pose>-3.5 -0.95 0.3 0 -0.169778 1.5708</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>3.55 1 0.06</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>3.55 1 0.06</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.784 0.588 0.549 1</ambient>
+            <diffuse>0.784 0.588 0.549 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_red_1'>
+      <static>1</static>
+      <pose>-3.5 -2.525 0.015 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.03</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.03</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.784 0.588 0.549 1</ambient>
+            <diffuse>0.784 0.588 0.549 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_red_2'>
+      <static>1</static>
+      <pose>-3.5 -2.4083 0.025 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.05</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.05</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.784 0.588 0.549 1</ambient>
+            <diffuse>0.784 0.588 0.549 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_red_3'>
+      <static>1</static>
+      <pose>-3.5 -2.2917 0.035 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.07</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.07</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.784 0.588 0.549 1</ambient>
+            <diffuse>0.784 0.588 0.549 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_red_4'>
+      <static>1</static>
+      <pose>-3.5 -2.175 0.045 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.09</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.09</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.784 0.588 0.549 1</ambient>
+            <diffuse>0.784 0.588 0.549 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_red_5'>
+      <static>1</static>
+      <pose>-3.5 -2.0583 0.055 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.11</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.11</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.784 0.588 0.549 1</ambient>
+            <diffuse>0.784 0.588 0.549 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_red_6'>
+      <static>1</static>
+      <pose>-3.5 -1.9417 0.065 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.13</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.13</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.784 0.588 0.549 1</ambient>
+            <diffuse>0.784 0.588 0.549 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_red_7'>
+      <static>1</static>
+      <pose>-3.5 -1.825 0.075 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.15</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.15</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.784 0.588 0.549 1</ambient>
+            <diffuse>0.784 0.588 0.549 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_red_8'>
+      <static>1</static>
+      <pose>-3.5 -1.7083 0.085 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.17</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.17</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.784 0.588 0.549 1</ambient>
+            <diffuse>0.784 0.588 0.549 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_red_9'>
+      <static>1</static>
+      <pose>-3.5 -1.5917 0.095 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.19</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.19</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.784 0.588 0.549 1</ambient>
+            <diffuse>0.784 0.588 0.549 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_red_10'>
+      <static>1</static>
+      <pose>-3.5 -1.475 0.105 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.21</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.21</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.784 0.588 0.549 1</ambient>
+            <diffuse>0.784 0.588 0.549 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_red_11'>
+      <static>1</static>
+      <pose>-3.5 -1.3583 0.115 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.23</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.23</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.784 0.588 0.549 1</ambient>
+            <diffuse>0.784 0.588 0.549 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_red_12'>
+      <static>1</static>
+      <pose>-3.5 -1.2417 0.125 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.25</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.25</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.784 0.588 0.549 1</ambient>
+            <diffuse>0.784 0.588 0.549 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_red_13'>
+      <static>1</static>
+      <pose>-3.5 -1.125 0.135 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.27</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.27</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.784 0.588 0.549 1</ambient>
+            <diffuse>0.784 0.588 0.549 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_red_14'>
+      <static>1</static>
+      <pose>-3.5 -1.0083 0.145 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.29</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.29</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.784 0.588 0.549 1</ambient>
+            <diffuse>0.784 0.588 0.549 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_red_15'>
+      <static>1</static>
+      <pose>-3.5 -0.8917 0.155 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.31</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.31</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.784 0.588 0.549 1</ambient>
+            <diffuse>0.784 0.588 0.549 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_red_16'>
+      <static>1</static>
+      <pose>-3.5 -0.775 0.165 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.33</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.33</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.784 0.588 0.549 1</ambient>
+            <diffuse>0.784 0.588 0.549 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_red_17'>
+      <static>1</static>
+      <pose>-3.5 -0.6583 0.175 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.35</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.35</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.784 0.588 0.549 1</ambient>
+            <diffuse>0.784 0.588 0.549 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_red_18'>
+      <static>1</static>
+      <pose>-3.5 -0.5417 0.185 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.37</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.37</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.784 0.588 0.549 1</ambient>
+            <diffuse>0.784 0.588 0.549 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_red_19'>
+      <static>1</static>
+      <pose>-3.5 -0.425 0.195 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.39</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.39</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.784 0.588 0.549 1</ambient>
+            <diffuse>0.784 0.588 0.549 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_red_20'>
+      <static>1</static>
+      <pose>-3.5 -0.3083 0.205 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.41</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.41</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.784 0.588 0.549 1</ambient>
+            <diffuse>0.784 0.588 0.549 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_red_21'>
+      <static>1</static>
+      <pose>-3.5 -0.1917 0.215 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.43</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.43</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.784 0.588 0.549 1</ambient>
+            <diffuse>0.784 0.588 0.549 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_red_22'>
+      <static>1</static>
+      <pose>-3.5 -0.075 0.225 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.45</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.45</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.784 0.588 0.549 1</ambient>
+            <diffuse>0.784 0.588 0.549 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_red_23'>
+      <static>1</static>
+      <pose>-3.5 0.0417 0.235 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.47</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.47</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.784 0.588 0.549 1</ambient>
+            <diffuse>0.784 0.588 0.549 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_red_24'>
+      <static>1</static>
+      <pose>-3.5 0.1583 0.245 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.49</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.49</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.784 0.588 0.549 1</ambient>
+            <diffuse>0.784 0.588 0.549 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_red_25'>
+      <static>1</static>
+      <pose>-3.5 0.275 0.255 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.51</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.51</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.784 0.588 0.549 1</ambient>
+            <diffuse>0.784 0.588 0.549 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_red_26'>
+      <static>1</static>
+      <pose>-3.5 0.3917 0.265 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.53</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.53</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.784 0.588 0.549 1</ambient>
+            <diffuse>0.784 0.588 0.549 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_red_27'>
+      <static>1</static>
+      <pose>-3.5 0.5083 0.275 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.55</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.55</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.784 0.588 0.549 1</ambient>
+            <diffuse>0.784 0.588 0.549 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_red_28'>
+      <static>1</static>
+      <pose>-3.5 0.625 0.285 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.57</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.57</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.784 0.588 0.549 1</ambient>
+            <diffuse>0.784 0.588 0.549 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_red_29'>
+      <static>1</static>
+      <pose>-3.5 0.7417 0.295 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.59</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.59</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.784 0.588 0.549 1</ambient>
+            <diffuse>0.784 0.588 0.549 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='plat_red'>
+      <static>1</static>
+      <pose>-3.5 1.3 0.3 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 1 0.6</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 1 0.6</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.961 0.667 0.235 1</ambient>
+            <diffuse>0.961 0.667 0.235 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='stp_red_0'>
+      <static>1</static>
+      <pose>-3.5 1.95 0.225 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.3 0.45</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.3 0.45</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.922 0.706 0.627 1</ambient>
+            <diffuse>0.922 0.706 0.627 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='stp_red_1'>
+      <static>1</static>
+      <pose>-3.5 2.25 0.15 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.3 0.3</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.3 0.3</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.922 0.706 0.627 1</ambient>
+            <diffuse>0.922 0.706 0.627 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='stp_red_2'>
+      <static>1</static>
+      <pose>-3.5 2.55 0.075 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.3 0.15</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.3 0.15</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.922 0.706 0.627 1</ambient>
+            <diffuse>0.922 0.706 0.627 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='st2_red'>
+      <static>1</static>
+      <pose>-1.65 0 0.675 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>0.3 1 0.15</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>0.3 1 0.15</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.922 0.706 0.627 1</ambient>
+            <diffuse>0.922 0.706 0.627 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='ramp_blue'>
+      <static>1</static>
+      <pose>3.5 -0.95 0.3 0 -0.169778 1.5708</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>3.55 1 0.06</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>3.55 1 0.06</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.51 0.706 0.784 1</ambient>
+            <diffuse>0.51 0.706 0.784 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_blue_1'>
+      <static>1</static>
+      <pose>3.5 -2.525 0.015 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.03</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.03</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.51 0.706 0.784 1</ambient>
+            <diffuse>0.51 0.706 0.784 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_blue_2'>
+      <static>1</static>
+      <pose>3.5 -2.4083 0.025 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.05</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.05</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.51 0.706 0.784 1</ambient>
+            <diffuse>0.51 0.706 0.784 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_blue_3'>
+      <static>1</static>
+      <pose>3.5 -2.2917 0.035 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.07</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.07</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.51 0.706 0.784 1</ambient>
+            <diffuse>0.51 0.706 0.784 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_blue_4'>
+      <static>1</static>
+      <pose>3.5 -2.175 0.045 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.09</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.09</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.51 0.706 0.784 1</ambient>
+            <diffuse>0.51 0.706 0.784 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_blue_5'>
+      <static>1</static>
+      <pose>3.5 -2.0583 0.055 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.11</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.11</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.51 0.706 0.784 1</ambient>
+            <diffuse>0.51 0.706 0.784 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_blue_6'>
+      <static>1</static>
+      <pose>3.5 -1.9417 0.065 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.13</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.13</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.51 0.706 0.784 1</ambient>
+            <diffuse>0.51 0.706 0.784 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_blue_7'>
+      <static>1</static>
+      <pose>3.5 -1.825 0.075 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.15</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.15</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.51 0.706 0.784 1</ambient>
+            <diffuse>0.51 0.706 0.784 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_blue_8'>
+      <static>1</static>
+      <pose>3.5 -1.7083 0.085 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.17</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.17</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.51 0.706 0.784 1</ambient>
+            <diffuse>0.51 0.706 0.784 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_blue_9'>
+      <static>1</static>
+      <pose>3.5 -1.5917 0.095 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.19</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.19</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.51 0.706 0.784 1</ambient>
+            <diffuse>0.51 0.706 0.784 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_blue_10'>
+      <static>1</static>
+      <pose>3.5 -1.475 0.105 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.21</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.21</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.51 0.706 0.784 1</ambient>
+            <diffuse>0.51 0.706 0.784 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_blue_11'>
+      <static>1</static>
+      <pose>3.5 -1.3583 0.115 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.23</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.23</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.51 0.706 0.784 1</ambient>
+            <diffuse>0.51 0.706 0.784 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_blue_12'>
+      <static>1</static>
+      <pose>3.5 -1.2417 0.125 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.25</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.25</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.51 0.706 0.784 1</ambient>
+            <diffuse>0.51 0.706 0.784 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_blue_13'>
+      <static>1</static>
+      <pose>3.5 -1.125 0.135 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.27</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.27</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.51 0.706 0.784 1</ambient>
+            <diffuse>0.51 0.706 0.784 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_blue_14'>
+      <static>1</static>
+      <pose>3.5 -1.0083 0.145 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.29</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.29</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.51 0.706 0.784 1</ambient>
+            <diffuse>0.51 0.706 0.784 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_blue_15'>
+      <static>1</static>
+      <pose>3.5 -0.8917 0.155 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.31</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.31</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.51 0.706 0.784 1</ambient>
+            <diffuse>0.51 0.706 0.784 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_blue_16'>
+      <static>1</static>
+      <pose>3.5 -0.775 0.165 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.33</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.33</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.51 0.706 0.784 1</ambient>
+            <diffuse>0.51 0.706 0.784 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_blue_17'>
+      <static>1</static>
+      <pose>3.5 -0.6583 0.175 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.35</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.35</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.51 0.706 0.784 1</ambient>
+            <diffuse>0.51 0.706 0.784 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_blue_18'>
+      <static>1</static>
+      <pose>3.5 -0.5417 0.185 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.37</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.37</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.51 0.706 0.784 1</ambient>
+            <diffuse>0.51 0.706 0.784 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_blue_19'>
+      <static>1</static>
+      <pose>3.5 -0.425 0.195 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.39</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.39</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.51 0.706 0.784 1</ambient>
+            <diffuse>0.51 0.706 0.784 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_blue_20'>
+      <static>1</static>
+      <pose>3.5 -0.3083 0.205 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.41</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.41</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.51 0.706 0.784 1</ambient>
+            <diffuse>0.51 0.706 0.784 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_blue_21'>
+      <static>1</static>
+      <pose>3.5 -0.1917 0.215 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.43</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.43</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.51 0.706 0.784 1</ambient>
+            <diffuse>0.51 0.706 0.784 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_blue_22'>
+      <static>1</static>
+      <pose>3.5 -0.075 0.225 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.45</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.45</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.51 0.706 0.784 1</ambient>
+            <diffuse>0.51 0.706 0.784 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_blue_23'>
+      <static>1</static>
+      <pose>3.5 0.0417 0.235 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.47</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.47</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.51 0.706 0.784 1</ambient>
+            <diffuse>0.51 0.706 0.784 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_blue_24'>
+      <static>1</static>
+      <pose>3.5 0.1583 0.245 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.49</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.49</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.51 0.706 0.784 1</ambient>
+            <diffuse>0.51 0.706 0.784 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_blue_25'>
+      <static>1</static>
+      <pose>3.5 0.275 0.255 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.51</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.51</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.51 0.706 0.784 1</ambient>
+            <diffuse>0.51 0.706 0.784 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_blue_26'>
+      <static>1</static>
+      <pose>3.5 0.3917 0.265 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.53</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.53</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.51 0.706 0.784 1</ambient>
+            <diffuse>0.51 0.706 0.784 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_blue_27'>
+      <static>1</static>
+      <pose>3.5 0.5083 0.275 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.55</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.55</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.51 0.706 0.784 1</ambient>
+            <diffuse>0.51 0.706 0.784 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_blue_28'>
+      <static>1</static>
+      <pose>3.5 0.625 0.285 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.57</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.57</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.51 0.706 0.784 1</ambient>
+            <diffuse>0.51 0.706 0.784 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rampsup_blue_29'>
+      <static>1</static>
+      <pose>3.5 0.7417 0.295 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.59</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.118667 0.59</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.51 0.706 0.784 1</ambient>
+            <diffuse>0.51 0.706 0.784 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='plat_blue'>
+      <static>1</static>
+      <pose>3.5 1.3 0.3 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 1 0.6</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 1 0.6</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.235 0.667 0.961 1</ambient>
+            <diffuse>0.235 0.667 0.961 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='stp_blue_0'>
+      <static>1</static>
+      <pose>3.5 1.95 0.225 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.3 0.45</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.3 0.45</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.588 0.843 0.863 1</ambient>
+            <diffuse>0.588 0.843 0.863 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='stp_blue_1'>
+      <static>1</static>
+      <pose>3.5 2.25 0.15 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.3 0.3</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.3 0.3</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.588 0.843 0.863 1</ambient>
+            <diffuse>0.588 0.843 0.863 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='stp_blue_2'>
+      <static>1</static>
+      <pose>3.5 2.55 0.075 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>1 0.3 0.15</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>1 0.3 0.15</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.588 0.843 0.863 1</ambient>
+            <diffuse>0.588 0.843 0.863 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='st2_blue'>
+      <static>1</static>
+      <pose>1.65 0 0.675 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>0.3 1 0.15</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>0.3 1 0.15</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.588 0.843 0.863 1</ambient>
+            <diffuse>0.588 0.843 0.863 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rail_ns-'>
+      <static>1</static>
+      <pose>0 -3 0.65 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>6 0.1 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>6 0.1 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.745 0.745 0.725 1</ambient>
+            <diffuse>0.745 0.745 0.725 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rail_ns+'>
+      <static>1</static>
+      <pose>0 3 0.65 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>6 0.1 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>6 0.1 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.745 0.745 0.725 1</ambient>
+            <diffuse>0.745 0.745 0.725 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rail_we_-_0'>
+      <static>1</static>
+      <pose>-3 -2.85 0.65 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>0.1 0.3 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>0.1 0.3 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.745 0.745 0.725 1</ambient>
+            <diffuse>0.745 0.745 0.725 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rail_we_-_1'>
+      <static>1</static>
+      <pose>-3 2.85 0.65 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>0.1 0.3 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>0.1 0.3 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.745 0.745 0.725 1</ambient>
+            <diffuse>0.745 0.745 0.725 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rail_we_+_0'>
+      <static>1</static>
+      <pose>3 -2.85 0.65 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>0.1 0.3 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>0.1 0.3 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.745 0.745 0.725 1</ambient>
+            <diffuse>0.745 0.745 0.725 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='rail_we_+_1'>
+      <static>1</static>
+      <pose>3 2.85 0.65 0 -0 0</pose>
+      <link name='link'>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>0.1 0.3 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='vis'>
+          <geometry>
+            <box>
+              <size>0.1 0.3 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.745 0.745 0.725 1</ambient>
+            <diffuse>0.745 0.745 0.725 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='field_decor'>
+      <static>1</static>
+      <pose>0 0 0 0 -0 0</pose>
+      <link name='link'>
+        <visual name='v0'>
+          <pose>-2.75 0 0.004 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>5.499 10.999 0.006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.941 0.824 0.824 1</ambient>
+            <diffuse>0.941 0.824 0.824 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name='v1'>
+          <pose>2.75 0 0.004 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>5.499 10.999 0.006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.667 0.824 0.902 1</ambient>
+            <diffuse>0.667 0.824 0.902 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name='v2'>
+          <pose>-5.15 5.15 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.696 0.696 0.006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.875 0.133 0.133 1</ambient>
+            <diffuse>0.875 0.133 0.133 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name='v3'>
+          <pose>-4.35 5.15 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.696 0.696 0.006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.875 0.133 0.133 1</ambient>
+            <diffuse>0.875 0.133 0.133 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name='v4'>
+          <pose>4.35 5.15 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.696 0.696 0.006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.196 0 1 1</ambient>
+            <diffuse>0.196 0 1 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name='v5'>
+          <pose>5.15 5.15 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.696 0.696 0.006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.196 0 1 1</ambient>
+            <diffuse>0.196 0 1 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name='v6'>
+          <pose>-4.5 -5 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 1 0.006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.875 0.133 0.133 1</ambient>
+            <diffuse>0.875 0.133 0.133 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name='v7'>
+          <pose>4.5 -5 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 1 0.006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.196 0 1 1</ambient>
+            <diffuse>0.196 0 1 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name='v8'>
+          <pose>0 4.25 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>1.196 1.196 0.006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.961 0.941 0.784 1</ambient>
+            <diffuse>0.961 0.941 0.784 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name='v9'>
+          <pose>0 -4.25 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.996 0.996 0.006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.961 0.941 0.784 1</ambient>
+            <diffuse>0.961 0.941 0.784 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name='v10'>
+          <pose>-1.5 0 0.604 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2.999 5.999 0.006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.922 0.706 0.627 1</ambient>
+            <diffuse>0.922 0.706 0.627 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name='v11'>
+          <pose>1.5 0 0.604 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2.999 5.999 0.006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.588 0.843 0.863 1</ambient>
+            <diffuse>0.588 0.843 0.863 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name='v12'>
+          <pose>0 0 0.904 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2.999 2.999 0.006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.745 0.745 0.725 1</ambient>
+            <diffuse>0.745 0.745 0.725 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name='v13'>
+          <pose>-1.8 -2.6 0.61 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.696 0.696 0.006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.875 0.133 0.133 1</ambient>
+            <diffuse>0.875 0.133 0.133 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name='v14'>
+          <pose>1.8 -2.6 0.61 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.696 0.696 0.006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.196 0 1 1</ambient>
+            <diffuse>0.196 0 1 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name='v15'>
+          <pose>0 -2.65 0.61 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.696 0.696 0.006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.961 0.941 0.784 1</ambient>
+            <diffuse>0.961 0.941 0.784 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name='v16'>
+          <pose>0 2.65 0.61 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.696 0.696 0.006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.961 0.941 0.784 1</ambient>
+            <diffuse>0.961 0.941 0.784 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name='v17'>
+          <pose>-2.7 -2.7 0.616 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.496 0.496 0.006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.157 0.392 0.196 1</ambient>
+            <diffuse>0.157 0.392 0.196 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name='v18'>
+          <pose>0 -2.7 0.616 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.496 0.496 0.006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.157 0.392 0.196 1</ambient>
+            <diffuse>0.157 0.392 0.196 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name='v19'>
+          <pose>2.7 -2.7 0.616 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.496 0.496 0.006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.157 0.392 0.196 1</ambient>
+            <diffuse>0.157 0.392 0.196 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name='v20'>
+          <pose>-2.7 2.7 0.616 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.496 0.496 0.006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.157 0.392 0.196 1</ambient>
+            <diffuse>0.157 0.392 0.196 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name='v21'>
+          <pose>0 2.7 0.616 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.496 0.496 0.006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.157 0.392 0.196 1</ambient>
+            <diffuse>0.157 0.392 0.196 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name='v22'>
+          <pose>2.7 2.7 0.616 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.496 0.496 0.006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.157 0.392 0.196 1</ambient>
+            <diffuse>0.157 0.392 0.196 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name='v23'>
+          <pose>-1.25 -1.25 0.916 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.496 0.496 0.006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.157 0.392 0.196 1</ambient>
+            <diffuse>0.157 0.392 0.196 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name='v24'>
+          <pose>1.25 -1.25 0.916 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.496 0.496 0.006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.157 0.392 0.196 1</ambient>
+            <diffuse>0.157 0.392 0.196 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name='v25'>
+          <pose>-1.25 1.25 0.916 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.496 0.496 0.006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.157 0.392 0.196 1</ambient>
+            <diffuse>0.157 0.392 0.196 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name='v26'>
+          <pose>1.25 1.25 0.916 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.496 0.496 0.006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.157 0.392 0.196 1</ambient>
+            <diffuse>0.157 0.392 0.196 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='sky_0'>
+      <static>0</static>
+      <pose>-0.48 4.73 0.1 0 -0 0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>0.22</mass>
+          <inertia>
+            <ixx>0.00146667</ixx>
+            <iyy>0.00146667</iyy>
+            <izz>0.00146667</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.2</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='up'>
+          <pose>0 0 0.05 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.875 0.133 0.133 1</ambient>
+            <diffuse>0.875 0.133 0.133 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name='dn'>
+          <pose>0 0 -0.05 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.196 0 1 1</ambient>
+            <diffuse>0.196 0 1 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='sky_1'>
+      <static>0</static>
+      <pose>0 4.73 0.1 0 -0 0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>0.22</mass>
+          <inertia>
+            <ixx>0.00146667</ixx>
+            <iyy>0.00146667</iyy>
+            <izz>0.00146667</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.2</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='up'>
+          <pose>0 0 0.05 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.875 0.133 0.133 1</ambient>
+            <diffuse>0.875 0.133 0.133 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name='dn'>
+          <pose>0 0 -0.05 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.196 0 1 1</ambient>
+            <diffuse>0.196 0 1 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='sky_2'>
+      <static>0</static>
+      <pose>0.48 4.73 0.1 0 -0 0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>0.22</mass>
+          <inertia>
+            <ixx>0.00146667</ixx>
+            <iyy>0.00146667</iyy>
+            <izz>0.00146667</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.2</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='up'>
+          <pose>0 0 0.05 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.196 0 1 1</ambient>
+            <diffuse>0.196 0 1 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name='dn'>
+          <pose>0 0 -0.05 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.875 0.133 0.133 1</ambient>
+            <diffuse>0.875 0.133 0.133 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='sky_3'>
+      <static>0</static>
+      <pose>-0.24 4.49 0.1 0 -0 0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>0.22</mass>
+          <inertia>
+            <ixx>0.00146667</ixx>
+            <iyy>0.00146667</iyy>
+            <izz>0.00146667</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.2</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='up'>
+          <pose>0 0 0.05 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.875 0.133 0.133 1</ambient>
+            <diffuse>0.875 0.133 0.133 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name='dn'>
+          <pose>0 0 -0.05 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.196 0 1 1</ambient>
+            <diffuse>0.196 0 1 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='sky_4'>
+      <static>0</static>
+      <pose>0.24 4.49 0.1 0 -0 0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>0.22</mass>
+          <inertia>
+            <ixx>0.00146667</ixx>
+            <iyy>0.00146667</iyy>
+            <izz>0.00146667</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.2</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='up'>
+          <pose>0 0 0.05 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.196 0 1 1</ambient>
+            <diffuse>0.196 0 1 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name='dn'>
+          <pose>0 0 -0.05 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.875 0.133 0.133 1</ambient>
+            <diffuse>0.875 0.133 0.133 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='sky_5'>
+      <static>0</static>
+      <pose>-0.48 4.25 0.1 0 -0 0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>0.22</mass>
+          <inertia>
+            <ixx>0.00146667</ixx>
+            <iyy>0.00146667</iyy>
+            <izz>0.00146667</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.2</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='up'>
+          <pose>0 0 0.05 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.196 0 1 1</ambient>
+            <diffuse>0.196 0 1 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name='dn'>
+          <pose>0 0 -0.05 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.875 0.133 0.133 1</ambient>
+            <diffuse>0.875 0.133 0.133 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='sky_6'>
+      <static>0</static>
+      <pose>0.48 4.25 0.1 0 -0 0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>0.22</mass>
+          <inertia>
+            <ixx>0.00146667</ixx>
+            <iyy>0.00146667</iyy>
+            <izz>0.00146667</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.2</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='up'>
+          <pose>0 0 0.05 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.875 0.133 0.133 1</ambient>
+            <diffuse>0.875 0.133 0.133 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name='dn'>
+          <pose>0 0 -0.05 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.196 0 1 1</ambient>
+            <diffuse>0.196 0 1 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='sky_7'>
+      <static>0</static>
+      <pose>-0.24 4.01 0.1 0 -0 0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>0.22</mass>
+          <inertia>
+            <ixx>0.00146667</ixx>
+            <iyy>0.00146667</iyy>
+            <izz>0.00146667</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.2</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='up'>
+          <pose>0 0 0.05 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.196 0 1 1</ambient>
+            <diffuse>0.196 0 1 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name='dn'>
+          <pose>0 0 -0.05 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.875 0.133 0.133 1</ambient>
+            <diffuse>0.875 0.133 0.133 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='sky_8'>
+      <static>0</static>
+      <pose>0.24 4.01 0.1 0 -0 0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>0.22</mass>
+          <inertia>
+            <ixx>0.00146667</ixx>
+            <iyy>0.00146667</iyy>
+            <izz>0.00146667</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.2</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='up'>
+          <pose>0 0 0.05 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.875 0.133 0.133 1</ambient>
+            <diffuse>0.875 0.133 0.133 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name='dn'>
+          <pose>0 0 -0.05 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.196 0 1 1</ambient>
+            <diffuse>0.196 0 1 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='sky_9'>
+      <static>0</static>
+      <pose>-0.48 3.77 0.1 0 -0 0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>0.22</mass>
+          <inertia>
+            <ixx>0.00146667</ixx>
+            <iyy>0.00146667</iyy>
+            <izz>0.00146667</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.2</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='up'>
+          <pose>0 0 0.05 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.875 0.133 0.133 1</ambient>
+            <diffuse>0.875 0.133 0.133 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name='dn'>
+          <pose>0 0 -0.05 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.196 0 1 1</ambient>
+            <diffuse>0.196 0 1 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='sky_10'>
+      <static>0</static>
+      <pose>0 3.77 0.1 0 -0 0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>0.22</mass>
+          <inertia>
+            <ixx>0.00146667</ixx>
+            <iyy>0.00146667</iyy>
+            <izz>0.00146667</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.2</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='up'>
+          <pose>0 0 0.05 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.196 0 1 1</ambient>
+            <diffuse>0.196 0 1 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name='dn'>
+          <pose>0 0 -0.05 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.875 0.133 0.133 1</ambient>
+            <diffuse>0.875 0.133 0.133 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='sky_11'>
+      <static>0</static>
+      <pose>0.48 3.77 0.1 0 -0 0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>0.22</mass>
+          <inertia>
+            <ixx>0.00146667</ixx>
+            <iyy>0.00146667</iyy>
+            <izz>0.00146667</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='col'>
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.2</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='up'>
+          <pose>0 0 0.05 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.196 0 1 1</ambient>
+            <diffuse>0.196 0 1 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name='dn'>
+          <pose>0 0 -0.05 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.875 0.133 0.133 1</ambient>
+            <diffuse>0.875 0.133 0.133 1</diffuse>
+            <specular>0.04 0.04 0.04 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type='adiabatic'/>
+    <audio>
+      <device>default</device>
+    </audio>
+    <wind/>
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <latitude_deg>0</latitude_deg>
+      <longitude_deg>0</longitude_deg>
+      <elevation>0</elevation>
+      <heading_deg>0</heading_deg>
+    </spherical_coordinates>
+    <state world_name='robocon2027_arena'>
+      <sim_time>1898 26000000</sim_time>
+      <real_time>1931 891315520</real_time>
+      <wall_time>1789010211 953959559</wall_time>
+      <iterations>1898026</iterations>
+      <model name='catch_floor'>
+        <pose>0 0 -0.25 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0 0 -0.25 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='central_pillar'>
+        <pose>0 0 1.3 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0 0 1.3 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='ddiv_0'>
+        <pose>0 1.9 0.65 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0 1.9 0.65 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='ddiv_1'>
+        <pose>0 -1.9 0.65 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0 -1.9 0.65 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='fence_pE'>
+        <pose>5.525 0 0.05 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>5.525 0 0.05 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='fence_pN'>
+        <pose>0 5.525 0.05 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0 5.525 0.05 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='fence_pS'>
+        <pose>0 -5.525 0.05 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0 -5.525 0.05 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='fence_pW'>
+        <pose>-5.525 0 0.05 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-5.525 0 0.05 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='field_base'>
+        <pose>0 0 -0.03 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0 0 -0.03 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='field_decor'>
+        <pose>0 0 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0 0 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='gdiv_0'>
+        <pose>0 3.325 0.05 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0 3.325 0.05 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='gdiv_1'>
+        <pose>0 5.175 0.05 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0 5.175 0.05 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='gdiv_2'>
+        <pose>0 -3.375 0.05 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0 -3.375 0.05 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='gdiv_3'>
+        <pose>0 -5.125 0.05 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0 -5.125 0.05 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='l1_platform'>
+        <pose>0 0 0.3 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0 0 0.3 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='l2_platform'>
+        <pose>0 0 0.75 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0 0 0.75 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='mustika_ball'>
+        <pose>0 -4.25 0.6 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0 -4.25 0.6 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='mustika_pillar'>
+        <pose>0 -4.25 0.25 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0 -4.25 0.25 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='plat_blue'>
+        <pose>3.5 1.3 0.3 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>3.5 1.3 0.3 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='plat_red'>
+        <pose>-3.5 1.3 0.3 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-3.5 1.3 0.3 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rail_ns+'>
+        <pose>0 3 0.65 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0 3 0.65 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rail_ns-'>
+        <pose>0 -3 0.65 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0 -3 0.65 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rail_we_+_0'>
+        <pose>3 -2.85 0.65 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>3 -2.85 0.65 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rail_we_+_1'>
+        <pose>3 2.85 0.65 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>3 2.85 0.65 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rail_we_-_0'>
+        <pose>-3 -2.85 0.65 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-3 -2.85 0.65 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rail_we_-_1'>
+        <pose>-3 2.85 0.65 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-3 2.85 0.65 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='ramp_blue'>
+        <pose>3.5 -0.95 0.3 0 -0.169778 1.5708</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>3.5 -0.95 0.3 0 -0.169778 1.5708</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='ramp_red'>
+        <pose>-3.5 -0.95 0.3 0 -0.169778 1.5708</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-3.5 -0.95 0.3 0 -0.169778 1.5708</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_blue_1'>
+        <pose>3.5 -2.525 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>3.5 -2.525 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_blue_10'>
+        <pose>3.5 -1.475 0.105 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>3.5 -1.475 0.105 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_blue_11'>
+        <pose>3.5 -1.3583 0.115 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>3.5 -1.3583 0.115 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_blue_12'>
+        <pose>3.5 -1.2417 0.125 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>3.5 -1.2417 0.125 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_blue_13'>
+        <pose>3.5 -1.125 0.135 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>3.5 -1.125 0.135 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_blue_14'>
+        <pose>3.5 -1.0083 0.145 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>3.5 -1.0083 0.145 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_blue_15'>
+        <pose>3.5 -0.8917 0.155 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>3.5 -0.8917 0.155 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_blue_16'>
+        <pose>3.5 -0.775 0.165 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>3.5 -0.775 0.165 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_blue_17'>
+        <pose>3.5 -0.6583 0.175 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>3.5 -0.6583 0.175 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_blue_18'>
+        <pose>3.5 -0.5417 0.185 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>3.5 -0.5417 0.185 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_blue_19'>
+        <pose>3.5 -0.425 0.195 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>3.5 -0.425 0.195 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_blue_2'>
+        <pose>3.5 -2.4083 0.025 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>3.5 -2.4083 0.025 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_blue_20'>
+        <pose>3.5 -0.3083 0.205 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>3.5 -0.3083 0.205 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_blue_21'>
+        <pose>3.5 -0.1917 0.215 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>3.5 -0.1917 0.215 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_blue_22'>
+        <pose>3.5 -0.075 0.225 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>3.5 -0.075 0.225 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_blue_23'>
+        <pose>3.5 0.0417 0.235 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>3.5 0.0417 0.235 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_blue_24'>
+        <pose>3.5 0.1583 0.245 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>3.5 0.1583 0.245 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_blue_25'>
+        <pose>3.5 0.275 0.255 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>3.5 0.275 0.255 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_blue_26'>
+        <pose>3.5 0.3917 0.265 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>3.5 0.3917 0.265 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_blue_27'>
+        <pose>3.5 0.5083 0.275 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>3.5 0.5083 0.275 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_blue_28'>
+        <pose>3.5 0.625 0.285 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>3.5 0.625 0.285 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_blue_29'>
+        <pose>3.5 0.7417 0.295 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>3.5 0.7417 0.295 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_blue_3'>
+        <pose>3.5 -2.2917 0.035 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>3.5 -2.2917 0.035 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_blue_4'>
+        <pose>3.5 -2.175 0.045 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>3.5 -2.175 0.045 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_blue_5'>
+        <pose>3.5 -2.0583 0.055 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>3.5 -2.0583 0.055 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_blue_6'>
+        <pose>3.5 -1.9417 0.065 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>3.5 -1.9417 0.065 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_blue_7'>
+        <pose>3.5 -1.825 0.075 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>3.5 -1.825 0.075 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_blue_8'>
+        <pose>3.5 -1.7083 0.085 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>3.5 -1.7083 0.085 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_blue_9'>
+        <pose>3.5 -1.5917 0.095 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>3.5 -1.5917 0.095 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_red_1'>
+        <pose>-3.5 -2.525 0.015 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-3.5 -2.525 0.015 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_red_10'>
+        <pose>-3.5 -1.475 0.105 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-3.5 -1.475 0.105 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_red_11'>
+        <pose>-3.5 -1.3583 0.115 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-3.5 -1.3583 0.115 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_red_12'>
+        <pose>-3.5 -1.2417 0.125 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-3.5 -1.2417 0.125 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_red_13'>
+        <pose>-3.5 -1.125 0.135 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-3.5 -1.125 0.135 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_red_14'>
+        <pose>-3.5 -1.0083 0.145 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-3.5 -1.0083 0.145 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_red_15'>
+        <pose>-3.5 -0.8917 0.155 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-3.5 -0.8917 0.155 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_red_16'>
+        <pose>-3.5 -0.775 0.165 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-3.5 -0.775 0.165 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_red_17'>
+        <pose>-3.5 -0.6583 0.175 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-3.5 -0.6583 0.175 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_red_18'>
+        <pose>-3.5 -0.5417 0.185 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-3.5 -0.5417 0.185 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_red_19'>
+        <pose>-3.5 -0.425 0.195 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-3.5 -0.425 0.195 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_red_2'>
+        <pose>-3.5 -2.4083 0.025 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-3.5 -2.4083 0.025 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_red_20'>
+        <pose>-3.5 -0.3083 0.205 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-3.5 -0.3083 0.205 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_red_21'>
+        <pose>-3.5 -0.1917 0.215 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-3.5 -0.1917 0.215 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_red_22'>
+        <pose>-3.5 -0.075 0.225 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-3.5 -0.075 0.225 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_red_23'>
+        <pose>-3.5 0.0417 0.235 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-3.5 0.0417 0.235 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_red_24'>
+        <pose>-3.5 0.1583 0.245 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-3.5 0.1583 0.245 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_red_25'>
+        <pose>-3.5 0.275 0.255 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-3.5 0.275 0.255 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_red_26'>
+        <pose>-3.5 0.3917 0.265 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-3.5 0.3917 0.265 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_red_27'>
+        <pose>-3.5 0.5083 0.275 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-3.5 0.5083 0.275 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_red_28'>
+        <pose>-3.5 0.625 0.285 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-3.5 0.625 0.285 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_red_29'>
+        <pose>-3.5 0.7417 0.295 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-3.5 0.7417 0.295 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_red_3'>
+        <pose>-3.5 -2.2917 0.035 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-3.5 -2.2917 0.035 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_red_4'>
+        <pose>-3.5 -2.175 0.045 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-3.5 -2.175 0.045 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_red_5'>
+        <pose>-3.5 -2.0583 0.055 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-3.5 -2.0583 0.055 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_red_6'>
+        <pose>-3.5 -1.9417 0.065 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-3.5 -1.9417 0.065 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_red_7'>
+        <pose>-3.5 -1.825 0.075 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-3.5 -1.825 0.075 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_red_8'>
+        <pose>-3.5 -1.7083 0.085 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-3.5 -1.7083 0.085 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rampsup_red_9'>
+        <pose>-3.5 -1.5917 0.095 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-3.5 -1.5917 0.095 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='sky_0'>
+        <pose>-0.48 4.73 0.1 -0 -0 -0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-0.48 4.73 0.1 -0 -0 -0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='sky_1'>
+        <pose>0 4.73 0.1 -0 -0 -0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0 4.73 0.1 -0 -0 -0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='sky_10'>
+        <pose>0 3.77 0.1 -0 -0 -0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0 3.77 0.1 -0 -0 -0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0 0 0 0 -0 0</acceleration>
+          <wrench>-0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='sky_11'>
+        <pose>0.48 3.77 0.1 -0 -0 -0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0.48 3.77 0.1 -0 -0 -0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0 0 0 0 -0 0</acceleration>
+          <wrench>-0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='sky_2'>
+        <pose>0.48 4.73 0.1 -0 -0 -0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0.48 4.73 0.1 -0 -0 -0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -0 0 -0 0</acceleration>
+          <wrench>0 0 -0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='sky_3'>
+        <pose>-0.24 4.49 0.1 -0 -0 -0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-0.24 4.49 0.1 -0 -0 -0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0 0 -0 0 -0 0</acceleration>
+          <wrench>-0 0 -0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='sky_4'>
+        <pose>0.24 4.49 0.1 -0 -0 -0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0.24 4.49 0.1 -0 -0 -0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0 0 0 0 -0 0</acceleration>
+          <wrench>-0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='sky_5'>
+        <pose>-0.48 4.25 0.1 -0 -0 -0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-0.48 4.25 0.1 -0 -0 -0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='sky_6'>
+        <pose>0.48 4.25 0.1 -0 -0 -0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0.48 4.25 0.1 -0 -0 -0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -0 0 -0 0</acceleration>
+          <wrench>0 0 -0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='sky_7'>
+        <pose>-0.24 4.01 0.1 -0 -0 -0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-0.24 4.01 0.1 -0 -0 -0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='sky_8'>
+        <pose>0.24 4.01 0.1 -0 -0 -0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0.24 4.01 0.1 -0 -0 -0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0 0 0 0 -0 0</acceleration>
+          <wrench>-0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='sky_9'>
+        <pose>-0.48 3.77 0.1 -0 -0 -0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-0.48 3.77 0.1 -0 -0 -0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0 0 0 0 -0 0</acceleration>
+          <wrench>-0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='st2_blue'>
+        <pose>1.65 0 0.675 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>1.65 0 0.675 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='st2_red'>
+        <pose>-1.65 0 0.675 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-1.65 0 0.675 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='stp_blue_0'>
+        <pose>3.5 1.95 0.225 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>3.5 1.95 0.225 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='stp_blue_1'>
+        <pose>3.5 2.25 0.15 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>3.5 2.25 0.15 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='stp_blue_2'>
+        <pose>3.5 2.55 0.075 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>3.5 2.55 0.075 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='stp_red_0'>
+        <pose>-3.5 1.95 0.225 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-3.5 1.95 0.225 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='stp_red_1'>
+        <pose>-3.5 2.25 0.15 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-3.5 2.25 0.15 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='stp_red_2'>
+        <pose>-3.5 2.55 0.075 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-3.5 2.55 0.075 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <light name='sun'>
+        <pose>0 0 40 0 -0 0</pose>
+      </light>
+    </state>
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose>11.1784 3.04277 28.3632 -0 1.25698 3.04199</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>
+    </gui>
+  </world>
+</sdf>
