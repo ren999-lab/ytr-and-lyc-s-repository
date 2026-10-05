@@ -24,7 +24,7 @@ def get_world_config(world_type):
         WorldType.RCMM: {
             'x': '-5.15',
             'y': '5.15',
-            'z': '0.2',
+            'z': '0.08',
             'yaw': '-1.57079632679',
             'world_path': 'robocon2027_arena.world'
         },
@@ -44,7 +44,8 @@ def generate_launch_description():
     default_robot_description = Command([
         FindExecutable(name='xacro'), ' "',
         os.path.join(bringup_dir, 'urdf', 'simulation_waking_robot.xacro'),
-        '" use_livox:=', LaunchConfiguration('use_livox')
+        '" use_livox:=', LaunchConfiguration('use_livox'),
+        ' publish_odom_tf:=', LaunchConfiguration('publish_odom_tf')
     ])
 
     # Create the launch configuration variables
@@ -70,7 +71,7 @@ def generate_launch_description():
     declare_rviz_cmd = DeclareLaunchArgument('rviz', default_value='true')
     declare_gui_cmd = DeclareLaunchArgument('gui', default_value='true')
     declare_livox_cmd = DeclareLaunchArgument(
-        'use_livox', default_value='false',
+        'use_livox', default_value='true',
         description='Enable Mid360 after building ros2_livox_simulation and its driver dependency')
     world_config = get_world_config(WorldType.RCMM)
     declare_spawn_cmds = [
@@ -153,7 +154,8 @@ def generate_launch_description():
                 IncludeLaunchDescription(
                     PythonLaunchDescriptionSource(os.path.join(pkg_gazebo_ros, 'launch', 'gzserver.launch.py')),
                     launch_arguments={
-                        'world': os.path.join(bringup_dir, 'worlds', world_config['world_path'])
+                        'world': os.path.join(bringup_dir, 'worlds', world_config['world_path']),
+                        'verbose': 'true',
                     }.items(),
                 )
             ]
@@ -168,6 +170,7 @@ def generate_launch_description():
     ld.add_action(declare_rviz_cmd)
     ld.add_action(declare_gui_cmd)
     ld.add_action(declare_livox_cmd)
+    ld.add_action(DeclareLaunchArgument('publish_odom_tf', default_value='true'))
     for declare_spawn_cmd in declare_spawn_cmds:
         ld.add_action(declare_spawn_cmd)
     ld.add_action(declare_world_cmd)

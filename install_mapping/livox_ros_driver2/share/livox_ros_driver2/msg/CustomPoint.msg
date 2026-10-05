@@ -1,0 +1,1 @@
+/home/ytr/dev_ws/src/27_rc_driver/livox_ros_driver2/msg/CustomPoint.msg

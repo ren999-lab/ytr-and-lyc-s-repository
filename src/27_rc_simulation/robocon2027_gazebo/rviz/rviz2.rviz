@@ -33,7 +33,7 @@ Visualization Manager:
       Marker Scale: 0.3
     - Class: rviz_default_plugins/PointCloud2
       Name: Livox PointCloud
-      Enabled: false
+      Enabled: true
       Alpha: 1
       Position Transformer: XYZ
       Color Transformer: AxisColor

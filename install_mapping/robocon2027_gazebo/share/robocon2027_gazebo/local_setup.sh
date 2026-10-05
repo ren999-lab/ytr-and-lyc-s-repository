@@ -1,0 +1,1 @@
+/home/ytr/dev_ws/build_mapping/robocon2027_gazebo/ament_cmake_environment_hooks/local_setup.sh

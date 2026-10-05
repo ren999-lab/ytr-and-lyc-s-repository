@@ -1,0 +1,1 @@
+ament_cmake_symlink_install_targets("TARGET_FILES" "/home/ytr/dev_ws/build_3d/ros2_livox_simulation/libros2_livox.so" "TARGETS" "ros2_livox" "ARCHIVE_DESTINATION" "lib" "LIBRARY_DESTINATION" "lib" "RUNTIME_DESTINATION" "bin")

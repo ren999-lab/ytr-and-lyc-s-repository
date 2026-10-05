@@ -1,0 +1,1 @@
+/home/ytr/dev_ws/build_3d/fast_lio/rosidl_generator_rs/fast_lio/rust/build.rs

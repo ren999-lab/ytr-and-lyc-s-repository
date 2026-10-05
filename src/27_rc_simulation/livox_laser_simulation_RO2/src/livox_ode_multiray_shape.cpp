@@ -34,10 +34,10 @@ LivoxOdeMultiRayShape::LivoxOdeMultiRayShape(CollisionPtr _parent)
     dGeomSetCategoryBits((dGeomID)this->raySpaceId, GZ_SENSOR_COLLIDE);
     dGeomSetCollideBits((dGeomID)this->raySpaceId, ~GZ_SENSOR_COLLIDE);
 
-    // These three lines may be unessecary
-    ODELinkPtr pLink =
-        boost::static_pointer_cast<ODELink>(this->collisionParent->GetLink());
-    pLink->SetSpaceId(this->raySpaceId);
+    // 这三行代码可能没什么必要
+    // ODELinkPtr pLink =
+    //     boost::static_pointer_cast<ODELink>(this->collisionParent->GetLink());
+    // pLink->SetSpaceId(this->raySpaceId);
     boost::static_pointer_cast<ODECollision>(this->collisionParent)->SetSpaceId(this->raySpaceId);
 }
 

@@ -16,6 +16,10 @@
   <!-- base_link to livox_frame -->
   <xacro:arg name="xyz" default="0.12 0.0 0.175" />
   <xacro:arg name="rpy" default="0 0 0" />
+  <!-- 第一阶段可关闭 Livox，避免雷达驱动依赖阻止基础小车启动。 -->
+  <xacro:arg name="use_livox" default="true" />
+  <!-- 二维沿用 Gazebo TF；三维入口关闭它，由 FAST-LIO 定位。 -->
+  <xacro:arg name="publish_odom_tf" default="true" />
 
   <link name="dummy"/>
 
@@ -58,8 +62,6 @@
         <cylinder length="${length_wheel}" radius="${radius_wheel}"/>
       </geometry>
     </collision>
-    <mu1>0.5</mu1>
-    <mu2>0.5</mu2>
     <xacro:default_inertial mass="0.5"/>
   </link>
 
@@ -76,8 +78,6 @@
         <cylinder length="${length_wheel}" radius="${radius_wheel}"/>
       </geometry>
     </collision>
-    <mu1>0.5</mu1>
-    <mu2>0.5</mu2>
     <xacro:default_inertial mass="0.5"/>
   </link>
 
@@ -94,8 +94,6 @@
         <cylinder length="${length_wheel}" radius="${radius_wheel}"/>
       </geometry>
     </collision>
-    <mu1>0.5</mu1>
-    <mu2>0.5</mu2>
     <xacro:default_inertial mass="0.5"/>
   </link>
 
@@ -112,8 +110,6 @@
         <cylinder length="${length_wheel}" radius="${radius_wheel}"/>
       </geometry>
     </collision>
-    <mu1>0.5</mu1>
-    <mu2>0.5</mu2>
     <xacro:default_inertial mass="0.5"/>
   </link>
 
@@ -126,7 +122,6 @@
 
   <joint name="base_to_wheel2" type="continuous">
     <axis xyz="0 0 1" />
-    <anchor xyz="0 0 0" />
     <limit effort="100" velocity="100" />
     <parent link="base_link"/>
     <child link="wheel_2"/>
@@ -185,15 +180,19 @@
   </gazebo>
   <gazebo reference="wheel_1">
     <material>Gazebo/Red</material>
+    <mu1>0.5</mu1><mu2>0.5</mu2>
   </gazebo>
   <gazebo reference="wheel_2">
     <material>Gazebo/Black</material>
+    <mu1>0.5</mu1><mu2>0.5</mu2>
   </gazebo>
   <gazebo reference="wheel_3">
     <material>Gazebo/Red</material>
+    <mu1>0.5</mu1><mu2>0.5</mu2>
   </gazebo>
   <gazebo reference="wheel_4">
     <material>Gazebo/Black</material>
+    <mu1>0.5</mu1><mu2>0.5</mu2>
   </gazebo>
   <gazebo reference="imu_link">
     <material>Gazebo/BuildingFrame</material>
@@ -205,7 +204,8 @@
   <!-- Drive controller plugin-->
   <!-- https://github.com/ros-simulation/gazebo_ros_pkgs/wiki/ROS-2-Migration:-Planar-Move -->
   <gazebo>
-    <plugin name="mecanum_controller" filename="libgazebo_ros_planar_move.so">
+    <!-- 沿用平面速度控制，但保留竖直速度，让重力和地面碰撞决定接地高度。 -->
+    <plugin name="mecanum_controller" filename="librc_planar_move.so">
       <ros>
         <!-- Add a namespace -->
         <namespace>/</namespace>
@@ -218,14 +218,17 @@
       <update_rate>100</update_rate>
       <!-- Set odom publish rate -->
       <publish_rate>10</publish_rate>
+      <cmd_timeout>0.5</cmd_timeout>
 
       <!-- Set if odom required -->
-      <publish_odom>false</publish_odom>
-      <publish_odom_tf>false</publish_odom_tf>
+      <publish_odom>true</publish_odom>
+      <publish_odom_tf>$(arg publish_odom_tf)</publish_odom_tf>
 
       <!-- Frame IDs -->
       <odometry_frame>odom</odometry_frame>
-      <robot_base_frame>base_link</robot_base_frame>
+      <!-- dummy 是现有 URDF 的根，dummy_joint 已发布 dummy -> base_link。
+           在根上接 odom，避免给 base_link 同时发布两个父坐标系。 -->
+      <robot_base_frame>dummy</robot_base_frame>
 
       <!-- Set odom covariance -->
       <covariance_x>0.0001</covariance_x>
@@ -251,9 +254,11 @@
   </gazebo>
 
   <!-- Livox-Mid360  -->
-  <xacro:include filename="$(find ros2_livox_simulation)/urdf/mid360.xacro" />
-  <xacro:mid360 name="livox_frame" parent="base_link" topic="/livox/lidar">
-    <origin xyz="$(arg xyz)" rpy="$(arg rpy)" />
-  </xacro:mid360>
+  <xacro:if value="$(arg use_livox)">
+    <xacro:include filename="$(find ros2_livox_simulation)/urdf/mid360.xacro" />
+    <xacro:mid360 name="livox_frame" parent="base_link" topic="/livox/lidar">
+      <origin xyz="$(arg xyz)" rpy="$(arg rpy)" />
+    </xacro:mid360>
+  </xacro:if>
 
 </robot>

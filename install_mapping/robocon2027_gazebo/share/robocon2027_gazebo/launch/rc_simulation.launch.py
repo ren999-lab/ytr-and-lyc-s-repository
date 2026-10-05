@@ -1,0 +1,1 @@
+/home/ytr/dev_ws/src/27_rc_simulation/robocon2027_gazebo/launch/rc_simulation.launch.py

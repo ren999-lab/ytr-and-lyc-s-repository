@@ -1,0 +1,1 @@
+/home/ytr/dev_ws/build_mapping/livox_ros_driver2/ament_cmake_core/livox_ros_driver2Config-version.cmake

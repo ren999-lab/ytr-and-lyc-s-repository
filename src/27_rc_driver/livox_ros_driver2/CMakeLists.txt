@@ -1,3 +1,21 @@
+cmake_minimum_required(VERSION 3.14)
+option(LIVOX_BUILD_DRIVER "Build the hardware driver and require Livox SDK2" ON)
+if(NOT LIVOX_BUILD_DRIVER)
+  project(livox_ros_driver2)
+  find_package(ament_cmake REQUIRED)
+  find_package(builtin_interfaces REQUIRED)
+  find_package(std_msgs REQUIRED)
+  find_package(rosidl_default_generators REQUIRED)
+  rosidl_generate_interfaces(livox_interfaces2
+    "msg/CustomPoint.msg"
+    "msg/CustomMsg.msg"
+    DEPENDENCIES builtin_interfaces std_msgs
+    LIBRARY_NAME ${PROJECT_NAME})
+  ament_export_dependencies(rosidl_default_runtime)
+  ament_package()
+  return()
+endif()
+
 # judge which cmake codes to use 
 if(ROS_EDITION STREQUAL "ROS1")
 

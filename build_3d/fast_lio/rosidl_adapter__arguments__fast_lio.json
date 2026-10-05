@@ -1,0 +1,6 @@
+{
+  "package_name": "fast_lio",
+  "non_idl_tuples": [
+    "/home/ytr/dev_ws/src/27_rc_localization/src/FAST_LIO:msg/Pose6D.msg"
+  ]
+}

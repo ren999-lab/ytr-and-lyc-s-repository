@@ -113,6 +113,9 @@ namespace gazebo
       
       std::string parent_name;
       std::string child_name;
+
+      std::string frame_name_;//添加了个成员变量，但我不清楚有什么作用，说是加载插件时，读取坐标系名称，每次发布点云时，填写消息头，
+
       int64_t samplesStep = 0;
       int64_t currStartIndex = 0;
       int64_t maxPointSize = 1000;

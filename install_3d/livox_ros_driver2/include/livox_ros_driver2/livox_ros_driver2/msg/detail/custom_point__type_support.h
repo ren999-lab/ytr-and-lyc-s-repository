@@ -1,0 +1,1 @@
+/home/ytr/dev_ws/build_3d/livox_ros_driver2/rosidl_generator_c/livox_ros_driver2/msg/detail/custom_point__type_support.h

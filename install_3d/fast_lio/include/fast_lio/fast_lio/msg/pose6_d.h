@@ -1,0 +1,1 @@
+/home/ytr/dev_ws/build_3d/fast_lio/rosidl_generator_c/fast_lio/msg/pose6_d.h

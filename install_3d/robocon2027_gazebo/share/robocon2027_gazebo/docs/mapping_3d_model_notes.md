@@ -1,0 +1,1 @@
+/home/ytr/dev_ws/src/27_rc_simulation/robocon2027_gazebo/docs/mapping_3d_model_notes.md

@@ -1,4 +1,10 @@
 #include <boost/chrono.hpp>
+// -----------------------
+#include <algorithm>
+#include <cmath>
+#include <limits>
+#include <gazebo_ros/conversions/builtin_interfaces.hpp>
+//------------------------
 #include <gazebo/physics/Model.hh>
 #include <gazebo/physics/MultiRayShape.hh>  // Store the latest laser scans into laserMsg
 #include <gazebo/physics/PhysicsEngine.hh>
@@ -75,6 +81,11 @@ namespace gazebo
         RCLCPP_INFO(rclcpp::get_logger("LivoxPointsPlugin"), "ros topic name: %s", curr_scan_topic.c_str());
 
         child_name = raySensor->Name();
+
+        frame_name_ = sdf->Get<std::string>("frame_name", child_name).first;
+        //从插件配置中读取 frame_name；如果没有配置，就使用 child_name，最后保存到 frame_name
+
+
         parent_name = raySensor->ParentName();
         size_t delimiter_pos = parent_name.find("::");
         parent_name = parent_name.substr(delimiter_pos + 2);
@@ -93,7 +104,13 @@ namespace gazebo
         convertDataToRotateInfo(datas, aviaInfos);
         RCLCPP_INFO(rclcpp::get_logger("LivoxPointsPlugin"), "scan info size: %ld", aviaInfos.size());
         maxPointSize = aviaInfos.size();
-
+//---------------------------------------------------------------
+        if (maxPointSize == 0){
+            RCLCPP_ERROR(node_->get_logger(), "Livox scan CSV has no valid rows");
+            return;
+        }
+        //雷达扫描 CSV 是否提供了有效的扫描数据。如果一条都没有，就报错并停止加载插件。
+//---------------------------------------------------------------
         RayPlugin::Load(_parent, sdfPtr);
         laserMsg.mutable_scan()->set_frame(_parent->ParentName());
         // parentEntity = world->GetEntity(_parent->ParentName());
@@ -114,6 +131,15 @@ namespace gazebo
         {
             downSample = 1;
         }
+//------------------------------------------------------------
+        if (samplesStep <= 0) {
+            RCLCPP_ERROR(node_->get_logger(),"Livox samples must be positive");
+            rayShape.reset();
+            return;
+        }
+//每次扫描使用的候选点数量 samplesStep 必须大于零，否则停止初始化雷达。
+//------------------------------------------------------------
+
         RCLCPP_INFO(rclcpp::get_logger("LivoxPointsPlugin"), "sample: %ld", samplesStep);
         RCLCPP_INFO(rclcpp::get_logger("LivoxPointsPlugin"), "downsample: %ld", downSample);
         rayShape->RayShapes().reserve(samplesStep / downSample);
@@ -155,20 +181,39 @@ namespace gazebo
 
         // 创建自定义消息 pp_livox，用于发布 Livox CustomMsg 类型消息
         livox_ros_driver2::msg::CustomMsg pp_livox;
-        pp_livox.header.stamp = node_->get_clock()->now();
-        pp_livox.header.frame_id = raySensor->Name();
+        // pp_livox.header.stamp = node_->get_clock()->now();
+        const auto stamp = gazebo_ros::Convert<builtin_interfaces::msg::Time>(world->SimTime());
+        pp_livox.header.stamp = stamp;
+        pp_livox.header.frame_id = frame_name_;
+        pp_livox.timebase = static_cast<uint64_t>(stamp.sec) * 1000000000ULL + stamp.nanosec;
+        //这段主要提高时间与坐标信息的正确性，不会明显让仿真跑得更快
+
+
+
+        // frame_id 已设为 frame_name_，不再用 sensor 名称覆盖。
         int count = 0;
-        boost::chrono::high_resolution_clock::time_point start_time = boost::chrono::high_resolution_clock::now();
+        // boost::chrono::high_resolution_clock::time_point start_time = boost::chrono::high_resolution_clock::now();
 
         // 用于 PointCloud2 类型消息发布
         sensor_msgs::msg::PointCloud2 cloud2;
-        cloud2.header.stamp = node_->get_clock()->now();
-        cloud2.header.frame_id = raySensor->Name();
+//----------------------------------------------------------
+//创建一帧 PointCloud2 点云，并准备存放 XYZ 坐标的空间。修改主要为了让消息内容与实际数据一致，方便 RViz 和点云转扫描节点处理。
+        cloud2.header.stamp = stamp;
+        cloud2.header.frame_id = frame_name_;
+        cloud2.is_dense = false;
+
+
+        // cloud2.header.stamp = node_->get_clock()->now();
+        // cloud2.header.frame_id = raySensor->Name();
+
+
 
         sensor_msgs::PointCloud2Modifier modifier(cloud2);
-        modifier.setPointCloud2FieldsByString(2, "xyz", "rgb");
-        modifier.resize(points_pair.size());
 
+
+        modifier.setPointCloud2FieldsByString(1, "xyz");
+        modifier.resize(points_pair.size());
+//----------------------------------------------------------
         sensor_msgs::PointCloud2Iterator<float> out_x(cloud2, "x");
         sensor_msgs::PointCloud2Iterator<float> out_y(cloud2, "y");
         sensor_msgs::PointCloud2Iterator<float> out_z(cloud2, "z");
@@ -179,7 +224,11 @@ namespace gazebo
             auto intensity = rayShape->GetRetro(pair.first);
 
             // 处理超出范围的数据
-            if (range <= RangeMin() || range >= RangeMax()) {
+            // if (range <= RangeMin() || range >= RangeMax()) {
+            //     range = 0;
+            // }
+            const bool valid_range = std::isfinite(range) && range > minDist && range < maxDist;
+            if(!valid_range){
                 range = 0;
             }
 
@@ -191,29 +240,39 @@ namespace gazebo
             auto point = range * axis;
 
             // 填充 CustomMsg 点云消息
-            livox_ros_driver2::msg::CustomPoint p;
+            livox_ros_driver2::msg::CustomPoint p{};
             p.x = point.X();
             p.y = point.Y();
             p.z = point.Z();
-            p.reflectivity = intensity;
+            p.reflectivity = std::isfinite(intensity) ?
+                static_cast<uint8_t>(std::max(0.0, std::min(255.0, intensity))) : 0;
+            p.tag = valid_range ? 0x10 : 0x00;
+            p.line = 0;
+            // p.reflectivity = intensity;
 
             // 填充 PointCloud2 点云消息
-            *out_x = point.X();
-            *out_y = point.Y();
-            *out_z = point.Z();
+            const float no_return = std::numeric_limits<float>::quiet_NaN();
+            *out_x = valid_range ? point.X() : no_return;
+            *out_y = valid_range ? point.Y() : no_return;
+            *out_z = valid_range ? point.Z() : no_return;
+            // *out_x = point.X();
+            // *out_y = point.Y();
+            // *out_z = point.Z();
 
             ++out_x;
             ++out_y;
             ++out_z;
 
             // 计算时间戳偏移
-            boost::chrono::high_resolution_clock::time_point end_time = boost::chrono::high_resolution_clock::now();
-            boost::chrono::nanoseconds elapsed_time = boost::chrono::duration_cast<boost::chrono::nanoseconds>(end_time - start_time);
-            p.offset_time = elapsed_time.count();
-
+            // boost::chrono::high_resolution_clock::time_point end_time = boost::chrono::high_resolution_clock::now();
+            // boost::chrono::nanoseconds elapsed_time = boost::chrono::duration_cast<boost::chrono::nanoseconds>(end_time - start_time);
+            // p.offset_time = elapsed_time.count();
+            p.offset_time = 0;
             // 将点云数据添加到 CustomMsg 消息中
-            pp_livox.points.push_back(p);
-            count++;
+            if (valid_range) {
+                pp_livox.points.push_back(p);
+                count++;
+            }
         }
 
         if (scanPub && scanPub->HasConnections()) {

@@ -1,0 +1,49 @@
+/**:
+  ros__parameters:
+    use_sim_time: true
+    simulation:
+      instantaneous_scan: true  # 同一 Gazebo 时刻采集；不伪造逐点时间
+    frames:
+      odom: lidar_odom
+      imu: imu_link
+      robot_root: dummy
+    common:
+      lid_topic: /livox/lidar
+      imu_topic: /livox/imu
+      time_sync_en: false
+      time_offset_lidar_to_imu: 0.0
+    preprocess:
+      lidar_type: 1  # CustomMsg 接口；不是仅凭 MID360 名字选择 PointCloud2 类型
+      scan_line: 4
+      timestamp_unit: 3
+      scan_rate: 10
+      blind: 0.3
+    point_filter_num: 1  # 射线插件已 downsample=5
+    feature_extract_enable: false
+    max_iteration: 4
+    filter_size_corner: 0.1
+    filter_size_surf: 0.1
+    filter_size_map: 0.1
+    cube_side_length: 100.0
+    runtime_pos_log_enable: false
+    mapping:
+      det_range: 20.0
+      fov_degree: 360.0
+      gyr_cov: 0.01
+      acc_cov: 0.1
+      b_gyr_cov: 0.0001
+      b_acc_cov: 0.0001
+      extrinsic_est_en: false
+      # IMU frame 中雷达原点的位置；来自 xacro 0.175 - 0.125。
+      extrinsic_T: [0.0, 0.0, 0.05]
+      extrinsic_R: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+    publish:
+      path_en: true
+      map_en: true
+      effect_map_en: false
+      scan_publish_en: true
+      dense_publish_en: false
+      scan_bodyframe_pub_en: false
+    pcd_save:
+      pcd_save_en: true
+      interval: -1  # 手动 /map_save 或正常退出，避免周期写盘打断仿真

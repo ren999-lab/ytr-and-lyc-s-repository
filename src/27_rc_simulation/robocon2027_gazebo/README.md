@@ -4,6 +4,10 @@ ABU ROBOCON 2027《追寻努山塔拉圣物》场地仿真 — Gazebo Classic 11
 
 ## 快速开始
 
+新增的小车启动入口及修改说明见外层 [README_start.md](../README_start.md)。
+启动 `ros2 launch robocon2027_gazebo rc_simulation.launch.py`，默认保留 RM 车体和 IMU、关闭 Livox；
+原 `arena.launch.py` 只启动场地。
+
 ```bash
 cd ~/ros2_ws && source /opt/ros/humble/setup.bash && source install/setup.bash
 ros2 launch robocon2027_gazebo arena.launch.py

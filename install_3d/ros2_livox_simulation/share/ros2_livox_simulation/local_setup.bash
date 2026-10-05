@@ -1,0 +1,1 @@
+/home/ytr/dev_ws/build_3d/ros2_livox_simulation/ament_cmake_environment_hooks/local_setup.bash
