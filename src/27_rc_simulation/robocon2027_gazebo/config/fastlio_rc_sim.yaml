@@ -3,6 +3,7 @@
     use_sim_time: true
     simulation:
       instantaneous_scan: true  # 同一 Gazebo 时刻采集；不伪造逐点时间
+      initialization_stationary_seconds: 1.0  # 连续稳定 1 个仿真秒后才估计 IMU 偏置
     frames:
       odom: lidar_odom
       imu: imu_link

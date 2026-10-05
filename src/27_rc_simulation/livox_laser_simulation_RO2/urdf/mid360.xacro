@@ -3,7 +3,8 @@
 
   <xacro:property name="M_PI" value="3.1415926"/> 
   <xacro:property name="laser_min_range" value="0.1"/>
-  <xacro:property name="laser_max_range" value="200.0"/>
+  <!-- Arena mapping uses the same 20 m range as FAST-LIO's det_range. -->
+  <xacro:property name="laser_max_range" value="20.0"/>
 
   <xacro:property name="samples" value="30000"/>
 <!--        -->

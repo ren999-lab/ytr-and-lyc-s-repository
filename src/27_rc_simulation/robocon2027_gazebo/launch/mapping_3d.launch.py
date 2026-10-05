@@ -4,13 +4,11 @@ import os
 
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, OpaqueFunction
+from launch.actions import DeclareLaunchArgument, GroupAction, IncludeLaunchDescription, OpaqueFunction, TimerAction
 from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
-from launch_ros.actions import Node,  SetParameter
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, OpaqueFunction, TimerAction
-from launch.actions import DeclareLaunchArgument, GroupAction, IncludeLaunchDescription, OpaqueFunction, TimerAction
+from launch_ros.actions import Node, SetParameter
 
 
 
@@ -59,6 +57,7 @@ def generate_launch_description():
             os.path.expanduser('~'), 'dev_ws', 'maps', 'rc_3d.pcd')),
         SetParameter(name='use_sim_time', value=True),
         GroupAction(scoped=True, actions=[simulation]), rviz,
-        # Wait three simulation seconds for spawning/ground contact before IMU init.
+        # TimerAction waits wall time, not simulation time. Keep the robot still
+        # until spawning and FAST-LIO IMU initialization have completed.
         TimerAction(period=3.0, actions=[OpaqueFunction(function=start_mapping)]),
     ])

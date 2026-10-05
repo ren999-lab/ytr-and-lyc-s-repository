@@ -172,17 +172,25 @@ namespace gazebo
         // 按当前扫描窗口更新射线端点，再调用 ODE 碰撞检测。points_pair
         // 将输出点与其命中的射线一一对应，供后续读取距离和反射率。
         std::vector<std::pair<int, AviaRotateInfo>> points_pair;
-        InitializeRays(points_pair, rayShape);
-        rayShape->Update();
-
-        msgs::Set(laserMsg.mutable_time(), world->SimTime());
         msgs::LaserScan *scan = laserMsg.mutable_scan();
-        InitializeScan(scan);
+        builtin_interfaces::msg::Time stamp;
+        {
+            // MultiRayShape::Update transforms each ray using Link::WorldPose.
+            // Lock the entire update, not only UpdateRays' collision checks, so
+            // physics cannot move the robot between rays in one instant scan.
+            boost::recursive_mutex::scoped_lock lock(
+                *world->Physics()->GetPhysicsUpdateMutex());
+            const auto scan_time = world->SimTime();
+            stamp = gazebo_ros::Convert<builtin_interfaces::msg::Time>(scan_time);
+            InitializeRays(points_pair, rayShape);
+            rayShape->Update();
+            msgs::Set(laserMsg.mutable_time(), scan_time);
+            InitializeScan(scan);
+        }
 
         // 创建自定义消息 pp_livox，用于发布 Livox CustomMsg 类型消息
         livox_ros_driver2::msg::CustomMsg pp_livox;
         // pp_livox.header.stamp = node_->get_clock()->now();
-        const auto stamp = gazebo_ros::Convert<builtin_interfaces::msg::Time>(world->SimTime());
         pp_livox.header.stamp = stamp;
         pp_livox.header.frame_id = frame_name_;
         pp_livox.timebase = static_cast<uint64_t>(stamp.sec) * 1000000000ULL + stamp.nanosec;

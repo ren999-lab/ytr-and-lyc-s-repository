@@ -25,6 +25,7 @@
 
 #include <gazebo/common/Events.hh>
 #include <gazebo/physics/Model.hh>
+#include <gazebo/physics/Link.hh>
 #include <gazebo/physics/World.hh>
 #include "robocon2027_gazebo/rc_planar_move.hpp"
 #include <cmath>
@@ -91,6 +92,9 @@ public:
   /// Pointer to model.
   gazebo::physics::ModelPtr model_;
 
+  // Control the chassis only. Model::SetAngularVel also overwrites wheel spin.
+  gazebo::physics::LinkPtr chassis_link_;
+
   /// Connection to event called at every world iteration.
   gazebo::event::ConnectionPtr update_connection_;
 
@@ -142,6 +146,14 @@ void RcPlanarMove::Load(gazebo::physics::ModelPtr _model, sdf::ElementPtr _sdf)
 
   // Initialize ROS node
   impl_->ros_node_ = gazebo_ros::Node::Get(_sdf);
+
+  impl_->chassis_link_ = _model->GetLink("canonical");
+  if (!impl_->chassis_link_) {
+    RCLCPP_ERROR(impl_->ros_node_->get_logger(), "No canonical chassis link; controller not loaded");
+    return;
+  }
+  RCLCPP_INFO(impl_->ros_node_->get_logger(), "Controlling chassis link [%s]",
+    impl_->chassis_link_->GetName().c_str());
 
   // Get QoS profiles
   const gazebo_ros::QoS & qos = impl_->ros_node_->get_qos();
@@ -256,13 +268,14 @@ void RcPlanarMovePrivate::OnUpdate(const gazebo::common::UpdateInfo & _info)
     }
     ignition::math::Pose3d pose = model_->WorldPose();
     auto yaw = static_cast<float>(pose.Rot().Yaw());
-    model_->SetLinearVel(
+    chassis_link_->SetLinearVel(
       ignition::math::Vector3d(
         target_cmd_vel_.linear.x * cosf(yaw) - target_cmd_vel_.linear.y * sinf(yaw),
         target_cmd_vel_.linear.y * cosf(yaw) + target_cmd_vel_.linear.x * sinf(yaw),
-        model_->WorldLinearVel().Z()));  // Preserve gravity/contact vertical motion.
-    const auto angular = model_->WorldAngularVel();
-    model_->SetAngularVel(ignition::math::Vector3d(angular.X(), angular.Y(), target_cmd_vel_.angular.z));
+        chassis_link_->WorldLinearVel().Z()));  // Preserve gravity/contact vertical motion.
+    const auto angular = chassis_link_->WorldAngularVel();
+    chassis_link_->SetAngularVel(
+      ignition::math::Vector3d(angular.X(), angular.Y(), target_cmd_vel_.angular.z));
 
     last_update_time_ = _info.simTime;
   }

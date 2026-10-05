@@ -214,8 +214,8 @@
         <remapping>odom:=odom</remapping>
       </ros>
 
-      <!-- Set control loop update rate -->
-      <update_rate>100</update_rate>
+      <!-- Apply chassis velocity every physics step; odometry stays at 10 Hz. -->
+      <update_rate>0</update_rate>
       <!-- Set odom publish rate -->
       <publish_rate>10</publish_rate>
       <cmd_timeout>0.5</cmd_timeout>

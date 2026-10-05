@@ -1,10 +1,11 @@
 # RC 仿真三维建图（FAST-LIO）
 
-文件已放进 `dev_ws/src`。完整 ROS 2 FAST-LIO 在
-`src/27_rc_localization/src/FAST_LIO`，含固定版本 ikd-Tree 的源码和头文件。
-不要复制 `.reference`、`backup_20261004_3d` 或 Windows 的 `.git` 到构建目录。
-可使用 `dev_ws_3d_src.zip`，里面的 `src/` 可合并进虚拟机 `~/dev_ws/`。
-复制前备份虚拟机现有 `src`；解压会覆盖同名源码，不覆盖 build/install。
+当前仓库根目录就是 ROS 工作空间，源码位于 `src`。
+完整 ROS 2 FAST-LIO 在 `src/27_rc_localization/src/FAST_LIO`，包含 ikd-Tree 源码和头文件。
+
+2026-10-05 直行偏航和地图重影修复的原因、Git 同步注意事项、重新编译及诊断步骤，
+请先看 [修复与验证说明](docs/MOTION_AND_MAP_FIX_20261005.md)。优先使用该文档中的
+`build_motion_fix/install_motion_fix`，避免运行仓库携带的旧构建结果。
 
 ## 1. 安装依赖与编译
 
