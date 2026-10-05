@@ -3,7 +3,11 @@
     use_sim_time: true
     simulation:
       instantaneous_scan: true  # 同一 Gazebo 时刻采集；不伪造逐点时间
-      initialization_stationary_seconds: 1.0  # 连续稳定 1 个仿真秒后才估计 IMU 偏置
+      initialization_stationary_seconds: 1.0  # 使用整个窗口估计偏置，允许零均值接触振动
+      initialization_mean_gyro_limit: 0.02  # rad/s，持续转动仍拒绝初始化
+      initialization_gyro_rms_limit: 0.08  # rad/s，窗口内角速度波动
+      initialization_mean_acc_error_limit: 0.5  # m/s^2，平均加速度模长与重力之差
+      initialization_acc_rms_limit: 2.0  # m/s^2，窗口内加速度波动
     frames:
       odom: lidar_odom
       imu: imu_link

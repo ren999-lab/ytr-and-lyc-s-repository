@@ -914,6 +914,21 @@ public:
         p_imu->instantaneous_scan = instantaneous_scan;
         p_imu->initialization_stationary_seconds = this->declare_parameter<double>(
             "simulation.initialization_stationary_seconds", 1.0);
+        p_imu->initialization_mean_gyro_limit = this->declare_parameter<double>(
+            "simulation.initialization_mean_gyro_limit", 0.02);
+        p_imu->initialization_gyro_rms_limit = this->declare_parameter<double>(
+            "simulation.initialization_gyro_rms_limit", 0.08);
+        p_imu->initialization_mean_acc_error_limit = this->declare_parameter<double>(
+            "simulation.initialization_mean_acc_error_limit", 0.5);
+        p_imu->initialization_acc_rms_limit = this->declare_parameter<double>(
+            "simulation.initialization_acc_rms_limit", 2.0);
+        for (double limit : {p_imu->initialization_stationary_seconds,
+                             p_imu->initialization_mean_gyro_limit,
+                             p_imu->initialization_gyro_rms_limit,
+                             p_imu->initialization_mean_acc_error_limit,
+                             p_imu->initialization_acc_rms_limit})
+            if (!std::isfinite(limit) || limit < 0.0)
+                throw std::runtime_error("Simulation IMU initialization limits must be finite and nonnegative.");
         if (extrinT.size() != 3 || extrinR.size() != 9 || p_pre->point_filter_num < 1)
             throw std::runtime_error("Invalid extrinsics or point_filter_num.");
         if (instantaneous_scan && (p_pre->lidar_type != AVIA || p_pre->feature_enabled))
@@ -1032,13 +1047,16 @@ private:
             if (!p_imu->Initialized())
             {
                 RCLCPP_INFO_THROTTLE(this->get_logger(), *this->get_clock(), 3000,
-                    "IMU initializing: %s; stable %.3f/%.3f sim s; "
-                    "max |gyro| %.6f rad/s; max |acc_norm - gravity| %.6f m/s^2",
+                    "IMU initializing: %s; window %.3f/%.3f sim s; "
+                    "mean |gyro| %.6f, gyro RMS %.6f rad/s; "
+                    "mean acc error %.6f, acc RMS %.6f m/s^2",
                     p_imu->initialization_status,
                     p_imu->initialization_stable_seconds,
                     p_imu->initialization_stationary_seconds,
-                    p_imu->initialization_max_gyro,
-                    p_imu->initialization_max_acc_error);
+                    p_imu->initialization_mean_gyro,
+                    p_imu->initialization_gyro_rms,
+                    p_imu->initialization_mean_acc_error,
+                    p_imu->initialization_acc_rms);
                 return;
             }
             state_point = kf.get_x();

@@ -38,7 +38,7 @@ def compile_run(source):
         cpp.write_text(source, encoding='utf-8')
         subprocess.run([compiler, '-std=c++17', '-pthread', str(cpp), '-o', str(executable)],
                        check=True, env=env)
-        subprocess.run([str(executable)], check=True, env=env)
+        subprocess.run([str(executable)], check=True, env=env, cwd=folder)
 
 
 class MotionTests(unittest.TestCase):
@@ -152,44 +152,107 @@ int main(){
 }
 ''')
 
-    def test_actual_imu_gate_rejects_fall_motion_nan_and_clock_rollback(self):
+    def test_actual_imu_window_accepts_contact_jitter_and_rejects_motion(self):
         code = function(LIO / 'src/IMU_Processing.hpp', 'bool ImuProcess::SimulationImuReady(')
+        process = function(LIO / 'src/IMU_Processing.hpp', 'void ImuProcess::Process(')
         compile_run(r'''
+#include <algorithm>
 #include <cassert>
 #include <cmath>
+#include <deque>
+#include <fstream>
+#include <iostream>
 #include <limits>
 #include <memory>
+#include <string>
 #include <vector>
 constexpr double G_m_s2=9.81;
-struct V3D {double x,y,z; V3D(double a,double b,double c):x(a),y(b),z(c){}
- double norm()const{return std::sqrt(x*x+y*y+z*z);} };
+using std::ios;
+constexpr int MAX_INI_COUNT=10;
+double omp_get_wtime(){return 0;}
+#define DEBUG_FILE_DIR(name) std::string(name)
+struct V3D {double x=0,y=0,z=0; V3D()=default;V3D(double a,double b,double c):x(a),y(b),z(c){}
+ double squaredNorm()const{return x*x+y*y+z*z;}
+ double norm()const{return std::sqrt(squaredNorm());}
+ V3D operator/(double n)const{return {x/n,y/n,z/n};}
+ V3D operator-(const V3D&b)const{return {x-b.x,y-b.y,z-b.z};}
+ V3D&operator+=(const V3D&b){x+=b.x;y+=b.y;z+=b.z;return *this;}
+ V3D&operator*=(double n){x*=n;y*=n;z*=n;return *this;}
+ std::string transpose()const{return "stub vector";}
+};
+const V3D Zero3d{0,0,0};
 namespace rclcpp {struct Time {double t;Time(double v):t(v){}double seconds()const{return t;}};}
 struct Imu {struct {double stamp;} header;struct Vec {double x=0,y=0,z=0;};
  Vec linear_acceleration,angular_velocity;};
-struct MeasureGroup {std::vector<std::shared_ptr<Imu>> imu;};
-struct ImuProcess {double stationary_begin_=-1,initialization_stationary_seconds=1;
+struct Cloud {void clear(){}};
+struct PointCloudXYZI {using Ptr=std::shared_ptr<Cloud>;};
+struct MeasureGroup {std::deque<std::shared_ptr<Imu>> imu;std::shared_ptr<Cloud>lidar=std::make_shared<Cloud>();};
+struct state_ikfom{};
+struct input_ikfom{};
+namespace esekfom {template<class T,int N,class U=input_ikfom>struct esekf {T get_x(){return {};}};}
+struct ImuProcess {double initialization_stationary_seconds=1;
+ std::deque<std::shared_ptr<Imu>> initialization_imu_;
  double initialization_max_gyro=0,initialization_max_acc_error=0,initialization_stable_seconds=0;
+ double initialization_mean_gyro=0,initialization_mean_acc_error=0,initialization_gyro_rms=0,initialization_acc_rms=0;
+ double initialization_mean_gyro_limit=0.02,initialization_gyro_rms_limit=0.08;
+ double initialization_mean_acc_error_limit=0.5,initialization_acc_rms_limit=2.0;
  const char* initialization_status="collecting IMU samples";
- bool SimulationImuReady(const MeasureGroup&);};
+ bool instantaneous_scan=true,imu_need_init_=true,b_first_frame_=true;
+ int init_iter_num=1;size_t initialized_samples=0;
+ V3D mean_gyr,mean_acc,cov_acc,cov_acc_scale,cov_gyr,cov_gyr_scale;
+ std::shared_ptr<Imu>last_imu_;std::ofstream fout_imu;
+ bool SimulationImuReady(const MeasureGroup&);
+ void Process(const MeasureGroup&,esekfom::esekf<state_ikfom,12>&,PointCloudXYZI::Ptr);
+ void IMU_init(const MeasureGroup&m,esekfom::esekf<state_ikfom,12>&,int&count){
+   // Model the actual IMU_init Reset: it clears the window being accumulated.
+   initialization_imu_.clear();initialized_samples=m.imu.size();
+   mean_acc=Zero3d;mean_gyr=Zero3d;
+   for(const auto&p:m.imu){const auto&a=p->linear_acceleration;const auto&w=p->angular_velocity;
+     mean_acc+=V3D(a.x,a.y,a.z)/m.imu.size();mean_gyr+=V3D(w.x,w.y,w.z)/m.imu.size();}
+   count=static_cast<int>(m.imu.size())+1;
+ }
+ void UndistortPcl(const MeasureGroup&,esekfom::esekf<state_ikfom,12>&,Cloud&){}
+};
 MeasureGroup batch(double start,double acc=9.81,double gyro=0){
  MeasureGroup m;for(int i=0;i<10;++i){auto p=std::make_shared<Imu>();
  p->header.stamp=start+i*0.01;p->linear_acceleration.z=acc;
  p->angular_velocity.x=gyro;m.imu.push_back(p);}return m;}
-''' + code + r'''
+''' + code + process + r'''
+bool window(double acc_offset=0,double rotation=0,double gyro_jitter=0.05,double acc_jitter=1.8){
+ ImuProcess p;bool ready=false;
+ for(int n=0;n<12;++n){auto m=batch(n*0.1);
+  for(int i=0;i<10;++i){auto&r=m.imu[i];const double sign=((n*10+i)%2)?-1:1;
+   r->linear_acceleration.z=9.81+acc_offset+sign*acc_jitter;
+   r->angular_velocity.x=rotation+sign*gyro_jitter;}
+  ready=p.SimulationImuReady(m);
+ }
+ return ready;
+}
 int main(){
  ImuProcess p;assert(!p.SimulationImuReady(batch(0,0)));
- assert(p.initialization_max_acc_error==9.81 && p.initialization_stable_seconds==0);
- assert(!p.SimulationImuReady(batch(0.1,9.81,-0.0397)));
- assert(p.initialization_max_gyro==0.0397 && p.initialization_stable_seconds==0);
- assert(!p.SimulationImuReady(batch(0.2)));
- assert(!p.SimulationImuReady(batch(0.8)));
- assert(p.SimulationImuReady(batch(1.2)));
- assert(!p.SimulationImuReady(batch(1.3,9.81,0.1)));
- assert(!p.SimulationImuReady(batch(1.4)));
- assert(!p.SimulationImuReady(batch(2.0)));
- assert(p.SimulationImuReady(batch(2.4)));
+ for(int n=1;n<=12;++n)p.SimulationImuReady(batch(n*0.1));
+ assert(p.SimulationImuReady(batch(1.3)));
  assert(!p.SimulationImuReady(batch(0.1)));
  assert(!p.SimulationImuReady(batch(0.2,std::numeric_limits<double>::quiet_NaN())));
+ assert(!p.SimulationImuReady(batch(0.3,9.81,0.3)));
+ assert(!p.SimulationImuReady(batch(0.4,20.0)));
+ assert(!p.SimulationImuReady(batch(1.0))); // Gap cannot complete the window.
+ assert(window()); // Similar amplitude to the measured Gazebo contact jitter.
+ assert(!window(0,0.04)); // Sustained slow rotation is not zero-mean vibration.
+ assert(!window(1.0,0)); // Sustained acceleration.
+ assert(!window(0,0,0.18)); // Excessive oscillation with zero mean gyro.
+ assert(!window(0,0,0.05,3.5)); // Excessive acceleration vibration.
+ ImuProcess init;esekfom::esekf<state_ikfom,12>kf;auto cloud=std::make_shared<Cloud>();
+ for(int n=0;n<12 && init.imu_need_init_;++n){auto m=batch(n*0.1);
+   for(int i=0;i<10;++i){double sign=((n*10+i)%2)?-1:1;
+     m.imu[i]->angular_velocity.x=sign*0.05;
+     m.imu[i]->linear_acceleration.z=9.81+sign*1.8;}
+   init.Process(m,kf,cloud);
+ }
+ assert(!init.imu_need_init_ && init.initialized_samples>=100);
+ assert(init.mean_gyr.norm()<0.001 && std::abs(init.mean_acc.norm()-9.81)<0.03);
+ ImuProcess real;real.instantaneous_scan=false;
+ real.Process(batch(0),kf,cloud);assert(!real.imu_need_init_ && real.initialized_samples==10);
 }
 ''')
 

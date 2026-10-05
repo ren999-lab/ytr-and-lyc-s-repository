@@ -45,7 +45,7 @@ def compare_yaw(ground, estimated):
 
 
 def summarize_imu(rows):
-    """Report the actual values used by the simulation initialization gate."""
+    """IMU summary; single-sample thresholds describe the legacy gate."""
     if not rows:
         return None
     finite = [r for r in rows if all(math.isfinite(v) for v in r)]
@@ -68,6 +68,7 @@ def summarize_imu(rows):
             longest = max(longest, row[0] - stable_begin)
         previous = row[0]
     return {'finite_samples': len(finite), 'nonfinite_samples': len(rows) - len(finite),
+            'single_sample_thresholds': 'legacy gate; current FAST-LIO checks full-window mean and vector RMS',
             'simulation_seconds': finite[-1][0] - finite[0][0],
             'mean_gyro_xyz_rad_s': [sum(r[i] for r in finite)/len(finite) for i in (3, 4, 1)],
             'max_gyro_norm_rad_s': max(gyro),

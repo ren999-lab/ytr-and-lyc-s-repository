@@ -39,6 +39,14 @@ class ImuProcess
   double initialization_max_gyro = 0.0;
   double initialization_max_acc_error = 0.0;
   double initialization_stable_seconds = 0.0;
+  double initialization_mean_gyro = 0.0;
+  double initialization_mean_acc_error = 0.0;
+  double initialization_gyro_rms = 0.0;
+  double initialization_acc_rms = 0.0;
+  double initialization_mean_gyro_limit = 0.02;
+  double initialization_gyro_rms_limit = 0.08;
+  double initialization_mean_acc_error_limit = 0.5;
+  double initialization_acc_rms_limit = 2.0;
   const char *initialization_status = "collecting IMU samples";
   bool Initialized() const { return !imu_need_init_; }
 
@@ -88,7 +96,7 @@ class ImuProcess
   int    init_iter_num = 1;
   bool   b_first_frame_ = true;
   bool   imu_need_init_ = true;
-  double stationary_begin_ = -1.0;
+  deque<sensor_msgs::msg::Imu::ConstSharedPtr> initialization_imu_;
   bool SimulationImuReady(const MeasureGroup &meas);
 };
 
@@ -121,49 +129,92 @@ void ImuProcess::Reset()
   start_timestamp_  = -1;
   init_iter_num     = 1;
   b_first_frame_    = true;
-  stationary_begin_ = -1.0;
+  initialization_imu_.clear();
   v_imu_.clear();
   IMUpose.clear();
   last_imu_.reset(new sensor_msgs::msg::Imu());
   cur_pcl_un_.reset(new PointCloudXYZI());
 }
 
-// Only the simulation path uses this gate. Do not estimate bias while falling
-// or driving: Gazebo's configured IMU has no intentional gyro bias.
+// Judge a complete IMU window: ODE contact jitter is oscillatory, not a bias.
+// Reject sustained rotation, acceleration and excessive vibration separately.
 bool ImuProcess::SimulationImuReady(const MeasureGroup &meas)
 {
-  initialization_max_gyro = 0.0;
-  initialization_max_acc_error = 0.0;
-  bool finite = true;
   for (const auto &imu : meas.imu)
   {
     const auto &a = imu->linear_acceleration;
     const auto &w = imu->angular_velocity;
     const double acc_norm = V3D(a.x, a.y, a.z).norm();
     const double gyro_norm = V3D(w.x, w.y, w.z).norm();
-    finite = finite && std::isfinite(acc_norm) && std::isfinite(gyro_norm);
-    initialization_max_gyro = std::max(initialization_max_gyro, gyro_norm);
-    initialization_max_acc_error = std::max(initialization_max_acc_error,
-                                           std::abs(acc_norm - G_m_s2));
+    if (!std::isfinite(acc_norm) || !std::isfinite(gyro_norm) ||
+        gyro_norm > 0.25 || std::abs(acc_norm - G_m_s2) > 5.0)
+    {
+      initialization_imu_.clear();
+      initialization_stable_seconds = 0.0;
+      initialization_status = "invalid IMU values, impact or fast rotation";
+      return false;
+    }
+    const double stamp = rclcpp::Time(imu->header.stamp).seconds();
+    if (!initialization_imu_.empty())
+    {
+      const double previous = rclcpp::Time(initialization_imu_.back()->header.stamp).seconds();
+      if (stamp <= previous || stamp - previous > 0.1)
+        initialization_imu_.clear();  // Never average across a reset or data gap.
+    }
+    initialization_imu_.push_back(imu);
   }
-  if (!finite || initialization_max_acc_error > 0.5 || initialization_max_gyro > 0.02)
+  if (initialization_imu_.empty()) return false;
+  const double last = rclcpp::Time(initialization_imu_.back()->header.stamp).seconds();
+  while (initialization_imu_.size() > 1 &&
+         last - rclcpp::Time(initialization_imu_[1]->header.stamp).seconds() >=
+           initialization_stationary_seconds)
+    initialization_imu_.pop_front();
+
+  initialization_stable_seconds = last -
+    rclcpp::Time(initialization_imu_.front()->header.stamp).seconds();
+  initialization_max_gyro = 0.0;
+  initialization_max_acc_error = 0.0;
+  V3D acc_mean = Zero3d, gyro_mean = Zero3d;
+  const double count = static_cast<double>(initialization_imu_.size());
+  for (const auto &imu : initialization_imu_)
   {
-    stationary_begin_ = -1.0;
-    initialization_stable_seconds = 0.0;
-    initialization_status = !finite ? "non-finite IMU values" :
-      (initialization_max_gyro > 0.02 ? "angular velocity exceeds 0.02 rad/s" :
-                                       "acceleration differs from gravity by over 0.5 m/s^2");
-    return false;
+    const auto &a = imu->linear_acceleration;
+    const auto &w = imu->angular_velocity;
+    const V3D acc(a.x, a.y, a.z), gyro(w.x, w.y, w.z);
+    acc_mean += acc / count;
+    gyro_mean += gyro / count;
+    initialization_max_gyro = std::max(initialization_max_gyro, gyro.norm());
+    initialization_max_acc_error = std::max(initialization_max_acc_error,
+                                           std::abs(acc.norm() - G_m_s2));
   }
-  const double first = rclcpp::Time(meas.imu.front()->header.stamp).seconds();
-  const double last = rclcpp::Time(meas.imu.back()->header.stamp).seconds();
-  if (stationary_begin_ < 0.0 || first < stationary_begin_)
-    stationary_begin_ = first;
-  initialization_stable_seconds = last - stationary_begin_;
-  initialization_status = initialization_stable_seconds < initialization_stationary_seconds ?
-    "waiting for stationary IMU" : "collecting IMU samples";
-  // The settling samples are discarded. IMU_init only starts after this gate.
-  return initialization_stable_seconds >= initialization_stationary_seconds;
+  initialization_mean_gyro = gyro_mean.norm();
+  initialization_mean_acc_error = std::abs(acc_mean.norm() - G_m_s2);
+  double gyro_variance = 0.0, acc_variance = 0.0;
+  for (const auto &imu : initialization_imu_)
+  {
+    const auto &a = imu->linear_acceleration;
+    const auto &w = imu->angular_velocity;
+    gyro_variance += (V3D(w.x, w.y, w.z) - gyro_mean).squaredNorm() / count;
+    acc_variance += (V3D(a.x, a.y, a.z) - acc_mean).squaredNorm() / count;
+  }
+  initialization_gyro_rms = std::sqrt(gyro_variance);
+  initialization_acc_rms = std::sqrt(acc_variance);
+
+  if (initialization_stable_seconds < initialization_stationary_seconds || count <= MAX_INI_COUNT)
+    initialization_status = "collecting a complete IMU window";
+  else if (initialization_mean_gyro > initialization_mean_gyro_limit)
+    initialization_status = "sustained rotation in IMU window";
+  else if (initialization_mean_acc_error > initialization_mean_acc_error_limit)
+    initialization_status = "mean acceleration differs from gravity";
+  else if (initialization_gyro_rms > initialization_gyro_rms_limit ||
+           initialization_acc_rms > initialization_acc_rms_limit)
+    initialization_status = "excessive IMU vibration";
+  else
+  {
+    initialization_status = "stationary IMU window accepted";
+    return true;
+  }
+  return false;
 }
 
 void ImuProcess::set_extrinsic(const MD(4,4) &T)
@@ -213,9 +264,7 @@ void ImuProcess::IMU_init(const MeasureGroup &meas, esekfom::esekf<state_ikfom, 
   
   if (b_first_frame_)
   {
-    const double settled_begin = stationary_begin_;
     Reset();
-    stationary_begin_ = settled_begin;
     N = 1;
     b_first_frame_ = false;
     const auto &imu_acc = meas.imu.front()->linear_acceleration;
@@ -414,17 +463,19 @@ void ImuProcess::Process(const MeasureGroup &meas,  esekfom::esekf<state_ikfom, 
 
   if (imu_need_init_)
   {
-    if (instantaneous_scan && initialization_stationary_seconds > 0.0 &&
-        !SimulationImuReady(meas))
+    if (instantaneous_scan && initialization_stationary_seconds > 0.0)
     {
-      // Drop any partly accumulated bias estimate after new motion. Preserve
-      // the stability timer across stationary batches while waiting.
+      if (!SimulationImuReady(meas)) return;
+      // Copy the WHOLE accepted window before IMU_init calls Reset. A latest
+      // 0.1 s batch can have biased jitter even when the full window is stable.
+      MeasureGroup initialization = meas;
+      initialization.imu = initialization_imu_;
       b_first_frame_ = true;
       init_iter_num = 1;
-      return;
+      IMU_init(initialization, kf_state, init_iter_num);
     }
-    /// The very first lidar frame
-    IMU_init(meas, kf_state, init_iter_num);
+    else
+      IMU_init(meas, kf_state, init_iter_num);
 
     imu_need_init_ = true;
     
