@@ -168,6 +168,8 @@ struct Imu {struct {double stamp;} header;struct Vec {double x=0,y=0,z=0;};
  Vec linear_acceleration,angular_velocity;};
 struct MeasureGroup {std::vector<std::shared_ptr<Imu>> imu;};
 struct ImuProcess {double stationary_begin_=-1,initialization_stationary_seconds=1;
+ double initialization_max_gyro=0,initialization_max_acc_error=0,initialization_stable_seconds=0;
+ const char* initialization_status="collecting IMU samples";
  bool SimulationImuReady(const MeasureGroup&);};
 MeasureGroup batch(double start,double acc=9.81,double gyro=0){
  MeasureGroup m;for(int i=0;i<10;++i){auto p=std::make_shared<Imu>();
@@ -176,7 +178,9 @@ MeasureGroup batch(double start,double acc=9.81,double gyro=0){
 ''' + code + r'''
 int main(){
  ImuProcess p;assert(!p.SimulationImuReady(batch(0,0)));
+ assert(p.initialization_max_acc_error==9.81 && p.initialization_stable_seconds==0);
  assert(!p.SimulationImuReady(batch(0.1,9.81,-0.0397)));
+ assert(p.initialization_max_gyro==0.0397 && p.initialization_stable_seconds==0);
  assert(!p.SimulationImuReady(batch(0.2)));
  assert(!p.SimulationImuReady(batch(0.8)));
  assert(p.SimulationImuReady(batch(1.2)));
@@ -199,6 +203,21 @@ int main(){
         estimated[-1] = (.2, math.radians(23))
         self.assertAlmostEqual(motion.compare_yaw(ground, estimated)['final_relative_yaw_error_deg'], 5)
         self.assertIsNone(motion.compare_yaw([], estimated))
+
+    def test_imu_summary_matches_stationary_gate_and_flags_nonfinite_samples(self):
+        spec = importlib.util.spec_from_file_location('motion', ROOT / 'tools/diagnose_motion.py')
+        motion = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(motion)
+        summary = motion.summarize_imu([
+            [0, 0, 9.81, 0, 0], [.01, 0, 9.81, -.0397, 0],
+            [.02, 0, 0, 0, 0], [.03, math.nan, 9.81, 0, 0]])
+        self.assertEqual(summary['finite_samples'], 3)
+        self.assertEqual(summary['nonfinite_samples'], 1)
+        self.assertAlmostEqual(summary['max_gyro_norm_rad_s'], .0397)
+        self.assertAlmostEqual(summary['gyro_above_0_02_percent'], 100/3)
+        self.assertAlmostEqual(summary['acc_error_above_0_5_percent'], 100/3)
+        self.assertEqual(summary['longest_stationary_sim_seconds'], 0)
+        self.assertIsNone(motion.summarize_imu([]))
 
 
 if __name__ == '__main__':

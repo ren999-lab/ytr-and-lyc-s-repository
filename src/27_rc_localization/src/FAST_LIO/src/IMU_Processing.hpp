@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <cmath>
 #include <math.h>
 #include <deque>
@@ -35,6 +36,11 @@ class ImuProcess
 
   bool instantaneous_scan=false;
   double initialization_stationary_seconds = 1.0;
+  double initialization_max_gyro = 0.0;
+  double initialization_max_acc_error = 0.0;
+  double initialization_stable_seconds = 0.0;
+  const char *initialization_status = "collecting IMU samples";
+  bool Initialized() const { return !imu_need_init_; }
 
   ImuProcess();
   ~ImuProcess();
@@ -126,25 +132,38 @@ void ImuProcess::Reset()
 // or driving: Gazebo's configured IMU has no intentional gyro bias.
 bool ImuProcess::SimulationImuReady(const MeasureGroup &meas)
 {
+  initialization_max_gyro = 0.0;
+  initialization_max_acc_error = 0.0;
+  bool finite = true;
   for (const auto &imu : meas.imu)
   {
     const auto &a = imu->linear_acceleration;
     const auto &w = imu->angular_velocity;
     const double acc_norm = V3D(a.x, a.y, a.z).norm();
     const double gyro_norm = V3D(w.x, w.y, w.z).norm();
-    if (!std::isfinite(acc_norm) || !std::isfinite(gyro_norm) ||
-        std::abs(acc_norm - G_m_s2) > 0.5 || gyro_norm > 0.02)
-    {
-      stationary_begin_ = -1.0;
-      return false;
-    }
+    finite = finite && std::isfinite(acc_norm) && std::isfinite(gyro_norm);
+    initialization_max_gyro = std::max(initialization_max_gyro, gyro_norm);
+    initialization_max_acc_error = std::max(initialization_max_acc_error,
+                                           std::abs(acc_norm - G_m_s2));
+  }
+  if (!finite || initialization_max_acc_error > 0.5 || initialization_max_gyro > 0.02)
+  {
+    stationary_begin_ = -1.0;
+    initialization_stable_seconds = 0.0;
+    initialization_status = !finite ? "non-finite IMU values" :
+      (initialization_max_gyro > 0.02 ? "angular velocity exceeds 0.02 rad/s" :
+                                       "acceleration differs from gravity by over 0.5 m/s^2");
+    return false;
   }
   const double first = rclcpp::Time(meas.imu.front()->header.stamp).seconds();
   const double last = rclcpp::Time(meas.imu.back()->header.stamp).seconds();
   if (stationary_begin_ < 0.0 || first < stationary_begin_)
     stationary_begin_ = first;
+  initialization_stable_seconds = last - stationary_begin_;
+  initialization_status = initialization_stable_seconds < initialization_stationary_seconds ?
+    "waiting for stationary IMU" : "collecting IMU samples";
   // The settling samples are discarded. IMU_init only starts after this gate.
-  return last - stationary_begin_ >= initialization_stationary_seconds;
+  return initialization_stable_seconds >= initialization_stationary_seconds;
 }
 
 void ImuProcess::set_extrinsic(const MD(4,4) &T)

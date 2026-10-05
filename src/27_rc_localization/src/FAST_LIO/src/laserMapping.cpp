@@ -961,9 +961,11 @@ public:
         fout_out.open(DEBUG_FILE_DIR("mat_out.txt"),ios::out);
         fout_dbg.open(DEBUG_FILE_DIR("dbg.txt"),ios::out);
         if (fout_pre && fout_out)
-            cout << "~~~~"<<ROOT_DIR<<" file opened" << endl;
+            RCLCPP_INFO(this->get_logger(), "Debug logs opened in %sLog/", ROOT_DIR);
         else
-            cout << "~~~~"<<ROOT_DIR<<" doesn't exist" << endl;
+            RCLCPP_WARN(this->get_logger(),
+                "Cannot open debug logs in %sLog/; check directory and permissions. "
+                "Mapping does not require debug logs.", ROOT_DIR);
 
         /*** ROS subscribe initialization ***/
         if (p_pre->lidar_type == AVIA)
@@ -1027,10 +1029,22 @@ private:
             t0 = omp_get_wtime();
 
             p_imu->Process(Measures, kf, feats_undistort);
+            if (!p_imu->Initialized())
+            {
+                RCLCPP_INFO_THROTTLE(this->get_logger(), *this->get_clock(), 3000,
+                    "IMU initializing: %s; stable %.3f/%.3f sim s; "
+                    "max |gyro| %.6f rad/s; max |acc_norm - gravity| %.6f m/s^2",
+                    p_imu->initialization_status,
+                    p_imu->initialization_stable_seconds,
+                    p_imu->initialization_stationary_seconds,
+                    p_imu->initialization_max_gyro,
+                    p_imu->initialization_max_acc_error);
+                return;
+            }
             state_point = kf.get_x();
             pos_lid = state_point.pos + state_point.rot * state_point.offset_T_L_I;
 
-            if (feats_undistort->empty() || (feats_undistort == NULL))
+            if (!feats_undistort || feats_undistort->empty())
             {
                 RCLCPP_WARN(this->get_logger(), "No point, skip this scan!\n");
                 return;

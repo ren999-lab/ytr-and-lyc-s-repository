@@ -44,6 +44,39 @@ def compare_yaw(ground, estimated):
             'final_relative_yaw_error_deg': math.degrees(differences[-1] - differences[0])}
 
 
+def summarize_imu(rows):
+    """Report the actual values used by the simulation initialization gate."""
+    if not rows:
+        return None
+    finite = [r for r in rows if all(math.isfinite(v) for v in r)]
+    if not finite:
+        return {'finite_samples': 0, 'nonfinite_samples': len(rows)}
+    gyro = [math.sqrt(r[1]**2 + r[3]**2 + r[4]**2) for r in finite]
+    acc = [r[2] for r in finite]
+    stable_begin = None
+    previous = None
+    longest = 0.0
+    for row in rows:
+        good = (all(math.isfinite(v) for v in row) and
+                math.sqrt(row[1]**2 + row[3]**2 + row[4]**2) <= 0.02 and
+                abs(row[2] - 9.81) <= 0.5)
+        if not good:
+            stable_begin = None
+        else:
+            if stable_begin is None or previous is None or not 0 < row[0] - previous < 0.1:
+                stable_begin = row[0]
+            longest = max(longest, row[0] - stable_begin)
+        previous = row[0]
+    return {'finite_samples': len(finite), 'nonfinite_samples': len(rows) - len(finite),
+            'simulation_seconds': finite[-1][0] - finite[0][0],
+            'mean_gyro_xyz_rad_s': [sum(r[i] for r in finite)/len(finite) for i in (3, 4, 1)],
+            'max_gyro_norm_rad_s': max(gyro),
+            'gyro_above_0_02_percent': 100*sum(v > 0.02 for v in gyro)/len(finite),
+            'acc_norm_min_mean_max_m_s2': [min(acc), sum(acc)/len(acc), max(acc)],
+            'acc_error_above_0_5_percent': 100*sum(abs(v-9.81) > 0.5 for v in acc)/len(finite),
+            'longest_stationary_sim_seconds': longest}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--duration', type=float, default=45, help='wall seconds to observe')
@@ -138,6 +171,7 @@ def main():
                     current.append(row)
             r['gazebo_during_straight_commands'] = segments
             imu = self.rows['imu']
+            r['imu_initialization_measurements'] = summarize_imu(imu)
             integrated = []
             if imu:
                 integrated = [(imu[0][0], 0.0)]
@@ -154,7 +188,7 @@ def main():
 
     rclpy.init()
     node = Observer()
-    print('只读采样开始。请先静止，再在安全空地低速直行、停下；本脚本不发送控制命令。', flush=True)
+    print('只读采样开始。排查初始化时请全程静止；运动测试请等 IMU Initial Done 后再低速直行。', flush=True)
     try:
         end = time.monotonic() + args.duration
         while rclpy.ok() and time.monotonic() < end:
